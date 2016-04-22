@@ -10,5 +10,6 @@ namespace FinalProject
         string GetLastName();
         string GetEmail();
         List<string> GetSubs();
+        void Notify(string title);
     }
 }

@@ -70,6 +70,7 @@
     <Compile Include="Resource\Book.cs" />
     <Compile Include="Resource\IBook.cs" />
     <Compile Include="Resource\Magazine.cs" />
+    <Compile Include="Resource\Stock.cs" />
     <Compile Include="Resource\StockLock.cs" />
     <Compile Include="Store\BookFactory.cs" />
     <Compile Include="Store\BookProducer.cs" />

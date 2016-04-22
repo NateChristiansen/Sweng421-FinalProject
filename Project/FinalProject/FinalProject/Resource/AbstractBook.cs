@@ -15,7 +15,6 @@ namespace FinalProject
         protected Decimal Price;
         protected int Stock;
         protected Store Store;
-        protected StockLock StockLock;
 
         public Image GetCover()
         {
@@ -55,26 +54,6 @@ namespace FinalProject
         public decimal GetPrice()
         {
             return Price;
-        }
-
-        public IBook RemoveBook()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public int GetQuantity()
-        {
-            return Stock;
-        }
-
-        public void UpdateQuantity(int amt)
-        {
-            Stock = amt;
-        }
-
-        public void SetStore(Store s)
-        {
-            this.Store = s;
         }
     }
 }

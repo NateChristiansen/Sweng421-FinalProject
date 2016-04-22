@@ -13,10 +13,6 @@ namespace FinalProject
         string GetISBN();
         string GetPublisher();
         Decimal GetPrice();
-        IBook RemoveBook();
-        int GetQuantity();
-        void UpdateQuantity(int amt);
-        void SetStore(Store s);
 
     }
 }
