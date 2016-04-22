@@ -1,17 +1,19 @@
-﻿namespace FinalProject
+﻿using System;
+
+namespace FinalProject
 {
     public class PriceFilter : ISearchFilter
     {
-        private ISearchFilter filter;
+        private ISearchFilter _filter;
 
         public PriceFilter(ISearchFilter filter)
         {
-            this.filter = filter;
+            this._filter = filter;
         }
 
-        public void Apply(string filter)
+        public void Apply(string filterText)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
     }
 }

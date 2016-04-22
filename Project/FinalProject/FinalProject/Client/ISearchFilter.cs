@@ -2,6 +2,6 @@
 {
     public interface ISearchFilter
     {
-        void Apply(string filter);
+        void Apply(string filterText);
     }
 }

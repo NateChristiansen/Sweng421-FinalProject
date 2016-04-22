@@ -1,43 +1,49 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace FinalProject
+﻿namespace FinalProject
 {
     public class Stock
     {
-        private IBook book;
-        private int stock;
-        private Store store;
-        private StockLock StockLock;
+        private readonly IBook _book;
+        private int _stock;
+        private Store _store;
+        private readonly StockLock _stockLock = new StockLock();
+
+        public Stock(IBook book)
+        {
+            _book = book;
+        }
 
         public void SetStore(Store s)
         {
-            store = s;
+            _store = s;
         }
 
         public IBook RemoveBook()
         {
-            if (stock <= 0) return null;
-            stock--;
-            return book;
+            _stockLock.WriteLock();
+            if (_stock <= 0) return null;
+            _stock--;
+            _stockLock.Done();
+            return _book;
         }
 
         public void UpdateQuanitity(int amt)
         {
-            stock += amt;
+            _stockLock.WriteLock();
+            _stock += amt;
+            _stockLock.Done();
         }
 
         public int GetQuantity()
         {
+            _stockLock.ReadLock();
+            var stock = _stock;
+            _stockLock.Done();
             return stock;
         }
 
         public IBook GetBook()
         {
-            return book;
+            return _book;
         }
     }
 }

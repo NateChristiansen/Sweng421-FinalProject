@@ -7,35 +7,35 @@ namespace FinalProject
 {
     public class Store
     {
-        private SubscriptionObserver subs;
-        private Dictionary<string, Stock> Stocks;
-        private BookFactory Factory;
+        private readonly SubscriptionObserver _subs = new SubscriptionObserver();
+        private readonly Dictionary<string, Stock> _stocks = new Dictionary<string, Stock>();
+        private readonly BookFactory _factory = new BookFactory();
 
         public List<IBook> GetBooks()
         {
-            return Stocks.Values.Select(s => s.GetBook()).ToList();
+            return _stocks.Values.Select(s => s.GetBook()).ToList();
         }
 
         public List<IBook> PurchaseBooks(List<string> titles, decimal wallet)
         {
-            var l = new List<IBook>();
+            var newBooks = new List<IBook>();
             titles.ForEach(t =>
             {
-                if (Stocks[t].GetQuantity() > 0)
+                if (_stocks[t].GetQuantity() > 0)
                 {
-                    l.Add(Factory.GetBook(t));
+                    newBooks.Add(_factory.GetBook(t));
                 }
             });
-            return l;
+            return newBooks;
         }
 
         public List<IBook> Search(string searchQuery)
         {
-            var x = Regex.Split(searchQuery.Trim(), @"\s+").ToList();
-            return GetBooks().Where(b => Contains(b, x)).ToList();
+            var keywords = Regex.Split(searchQuery.Trim(), @"\s+").ToList();
+            return GetBooks().Where(b => Contains(b, keywords)).ToList();
         }
 
-        private bool Contains(IBook b, List<string> keywords)
+        private static bool Contains(IBook b, IList<string> keywords)
         {
             if (!keywords.Any()) return Compare(b, keywords[0].ToLower());
             var keyword = keywords[0];
@@ -43,7 +43,7 @@ namespace FinalProject
             return Compare(b, keyword.ToLower()) && Contains(b, keywords);
         }
 
-        private bool Compare(IBook b, string keyword)
+        private static bool Compare(IBook b, string keyword)
         {
             return b.GetAuthor().ToLower().Contains(keyword) ||
                    b.GetGenre().ToLower().Contains(keyword) ||
@@ -53,16 +53,16 @@ namespace FinalProject
 
         public void Subscribe(IMember subscriber, string title)
         {
-            subs.AddSubscription(title, subscriber);
+            _subs.AddSubscription(title, subscriber);
         }
         public void UpdateSubs(string title)
         {
-            new Thread(() => subs.NotifySubscribers(title)).Start();
+            new Thread(() => _subs.NotifySubscribers(title)).Start();
         }
 
         public void AddBook(Stock bookstock)
         {
-            Stocks.Add(bookstock.GetBook().GetTitle(), bookstock);
+            _stocks.Add(bookstock.GetBook().GetTitle(), bookstock);
         }
     }
 }

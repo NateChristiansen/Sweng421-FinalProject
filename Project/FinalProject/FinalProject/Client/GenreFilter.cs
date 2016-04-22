@@ -1,16 +1,18 @@
-﻿namespace FinalProject
+﻿using System;
+
+namespace FinalProject
 {
     public class GenreFilter : ISearchFilter
     {
-        private ISearchFilter filter;
+        private ISearchFilter _filter;
 
         public GenreFilter(ISearchFilter filter)
         {
-            this.filter = filter;
+            _filter = filter;
         }
-        public void Apply(string filter)
+        public void Apply(string filterText)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
     }
 }

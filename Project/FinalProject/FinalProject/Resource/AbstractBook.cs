@@ -10,9 +10,9 @@ namespace FinalProject
         protected string Summary;
         protected string Author;
         protected string Genre;
-        protected string ISBN;
+        protected string Isbn;
         protected string Publisher;
-        protected Decimal Price;
+        protected decimal Price;
         protected int Stock;
         protected Store Store;
 
@@ -41,9 +41,9 @@ namespace FinalProject
             return Genre;
         }
 
-        public string GetISBN()
+        public string GetIsbn()
         {
-            return ISBN;
+            return Isbn;
         }
 
         public string GetPublisher()

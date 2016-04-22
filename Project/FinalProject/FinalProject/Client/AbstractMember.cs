@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace FinalProject
 {
@@ -9,7 +10,8 @@ namespace FinalProject
         protected string FirstName;
         protected string LastName;
         protected string Email;
-        protected List<string> SubscriberList; 
+        protected List<string> SubscriberList = new List<string>();
+
         public decimal GetWallet()
         {
             return Wallet;
@@ -38,6 +40,11 @@ namespace FinalProject
         public List<string> GetSubs()
         {
             return SubscriberList;
+        }
+
+        public void Notify(string title)
+        {
+            throw new NotImplementedException();
         }
     }
 }

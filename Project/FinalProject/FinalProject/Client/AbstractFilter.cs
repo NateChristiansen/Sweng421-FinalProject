@@ -1,10 +1,12 @@
-﻿namespace FinalProject
+﻿using System;
+
+namespace FinalProject
 {
     public abstract class AbstractFilter : ISearchFilter
     {
-        public void Apply(string filter)
+        public void Apply(string filterText)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
     }
 }

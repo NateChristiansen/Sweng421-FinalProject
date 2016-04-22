@@ -1,27 +1,25 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 
 namespace FinalProject
 {
     public class SubscriptionObserver
     {
-        private Dictionary<string, List<IMember>> subscribers;
+        private readonly Dictionary<string, List<IMember>> _subscribers = new Dictionary<string, List<IMember>>();
         public void NotifySubscribers(string title)
         {
-            subscribers[title].ForEach(s => s.Notify(title));
+            _subscribers[title].ForEach(s => s.Notify(title));
         }
 
         public void AddSubscription(string title, IMember member)
         {
-            if (subscribers.ContainsKey(title))
+            if (_subscribers.ContainsKey(title))
             {
-                subscribers[title].Add(member);
+                _subscribers[title].Add(member);
             }
             else
             {
-                var list = new List<IMember>();
-                list.Add(member);
-                subscribers.Add(title, list);
+                var list = new List<IMember> {member};
+                _subscribers.Add(title, list);
             }
         }
     }

@@ -10,9 +10,9 @@ namespace FinalProject
         string GetSummary();
         string GetAuthor();
         string GetGenre();
-        string GetISBN();
+        string GetIsbn();
         string GetPublisher();
-        Decimal GetPrice();
+        decimal GetPrice();
 
     }
 }

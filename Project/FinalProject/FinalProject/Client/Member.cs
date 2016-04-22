@@ -4,10 +4,10 @@
     {
         public Member(string firstName, string lastName, string email, string userName)
         {
-            this.FirstName = firstName;
-            this.LastName = lastName;
-            this.Email = email;
-            this.Username = userName;
+            FirstName = firstName;
+            LastName = lastName;
+            Email = email;
+            Username = userName;
         }
     }
 }

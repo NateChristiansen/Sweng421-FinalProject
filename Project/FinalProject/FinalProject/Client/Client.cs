@@ -2,7 +2,11 @@
 {
     public class Client
     {
-        private Store Store;
-        private ISearchFilter SearchFilter;
+        private Store _store;
+
+        public Client(Store store)
+        {
+            _store = store;
+        }
     }
 }

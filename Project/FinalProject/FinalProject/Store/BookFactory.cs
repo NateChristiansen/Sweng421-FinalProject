@@ -6,8 +6,8 @@ namespace FinalProject
     {
         public IBook GetBook(string bookTitle)
         {
-            Type type = Type.GetType("FinalProject." + bookTitle);
-            return (IBook)Activator.CreateInstance(type);
+            var type = Type.GetType("FinalProject." + bookTitle);
+            return type != null ? (IBook)Activator.CreateInstance(type) : null;
         }
     }
 }
