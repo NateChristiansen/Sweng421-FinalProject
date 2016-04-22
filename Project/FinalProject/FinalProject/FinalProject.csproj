@@ -56,6 +56,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Client\ClientUI.xaml.cs">
+      <DependentUpon>ClientUI.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Client\AbstractFilter.cs" />
     <Compile Include="Client\AbstractMember.cs" />
     <Compile Include="Client\AuthorFilter.cs" />
@@ -76,7 +79,11 @@
     <Compile Include="Store\BookProducer.cs" />
     <Compile Include="Store\Store.cs" />
     <Compile Include="Store\SubscriptionObserver.cs" />
-    <Page Include="MainWindow.xaml">
+    <Page Include="Client\ClientUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Store\ProducerUI.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -84,8 +91,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
+    <Compile Include="Store\ProducerUI.xaml.cs">
+      <DependentUpon>ProducerUI.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
