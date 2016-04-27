@@ -37,7 +37,7 @@ namespace FinalProject
 
         private static bool Contains(IBook b, IList<string> keywords)
         {
-            if (!keywords.Any()) return Compare(b, keywords[0].ToLower());
+            if (!keywords.Any()) return true;
             var keyword = keywords[0];
             keywords.RemoveAt(0);
             return Compare(b, keyword.ToLower()) && Contains(b, keywords);

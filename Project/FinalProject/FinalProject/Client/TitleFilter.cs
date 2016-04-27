@@ -2,11 +2,11 @@
 
 namespace FinalProject
 {
-    public class PriceFilter : ISearchFilter
+    public class TitleFilter : ISearchFilter
     {
         private ISearchFilter _filter;
 
-        public PriceFilter(ISearchFilter filter)
+        public TitleFilter(ISearchFilter filter)
         {
             this._filter = filter;
         }

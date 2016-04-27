@@ -8,7 +8,7 @@ namespace FinalProject
     public partial class App
     {
         static readonly Store Store = new Store();
-        BookProducer _prod = new BookProducer(Store);
+        Producer _prod = new Producer(Store);
         Client _client = new Client(Store);
     }
 }

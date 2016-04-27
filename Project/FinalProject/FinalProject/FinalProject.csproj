@@ -56,18 +56,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Client\ClientUI.xaml.cs">
-      <DependentUpon>ClientUI.xaml</DependentUpon>
+    <Compile Include="Client\Client.xaml.cs">
+      <DependentUpon>Client.xaml</DependentUpon>
     </Compile>
     <Compile Include="Client\AbstractFilter.cs" />
     <Compile Include="Client\AbstractMember.cs" />
     <Compile Include="Client\AuthorFilter.cs" />
-    <Compile Include="Client\Client.cs" />
     <Compile Include="Client\GenreFilter.cs" />
     <Compile Include="Client\IMember.cs" />
     <Compile Include="Client\ISearchFilter.cs" />
     <Compile Include="Client\Member.cs" />
-    <Compile Include="Client\PriceFilter.cs" />
+    <Compile Include="Client\TitleFilter.cs" />
     <Compile Include="Client\PublisherFilter.cs" />
     <Compile Include="Resource\AbstractBook.cs" />
     <Compile Include="Resource\Book.cs" />
@@ -76,14 +75,13 @@
     <Compile Include="Resource\Stock.cs" />
     <Compile Include="Resource\StockLock.cs" />
     <Compile Include="Store\BookFactory.cs" />
-    <Compile Include="Store\BookProducer.cs" />
     <Compile Include="Store\Store.cs" />
     <Compile Include="Store\SubscriptionObserver.cs" />
-    <Page Include="Client\ClientUI.xaml">
+    <Page Include="Client\Client.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Store\ProducerUI.xaml">
+    <Page Include="Store\Producer.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -91,8 +89,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Store\ProducerUI.xaml.cs">
-      <DependentUpon>ProducerUI.xaml</DependentUpon>
+    <Compile Include="Store\Producer.xaml.cs">
+      <DependentUpon>Producer.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>

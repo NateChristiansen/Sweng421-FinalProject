@@ -1,21 +1,32 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace FinalProject
 {
-    public class BookProducer
+    /// <summary>
+    /// Interaction logic for ProducerUI.xaml
+    /// </summary>
+    public partial class Producer : Window
     {
         private readonly Store _store;
-        private readonly ProducerUi _ui;
-        private readonly List<Stock> _stocks = new List<Stock>(); 
-
-        public BookProducer(Store s)
+        private readonly List<Stock> _stocks = new List<Stock>();
+        public Producer(Store s)
         {
+            InitializeComponent();
             _store = s;
-            _ui = new ProducerUi(this);
-            _ui.Show();
-            InitUnreleasedBooks();
+            Show();
+        }
+
+        private void AddToStoreButton_Click(object sender, RoutedEventArgs e)
+        {
+            AddBookToStore(null);
+        }
+
+        public void AddToUnreleasedBox(IBook book)
+        {
+            this.NotInStoreBox.Items.Add(book.GetTitle());
         }
 
         private void InitUnreleasedBooks()
@@ -63,16 +74,16 @@ namespace FinalProject
             for (int i = 0; i < _stocks.Count; i++)
             {
                 _store.AddBook(_stocks[i]);
-                _ui.AddToUnreleasedBox(_stocks[i].GetBook());
+                AddToUnreleasedBox(_stocks[i].GetBook());
             }
 
 
-            
+
         }
 
         private void InitReleasedBooks()
         {
-            
+
         }
 
         public void AddBookToStore(IBook book)
