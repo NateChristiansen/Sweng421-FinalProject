@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
 
 namespace FinalProject
 {
@@ -17,6 +18,11 @@ namespace FinalProject
         private void AddToStoreButton_Click(object sender, RoutedEventArgs e)
         {
             _producer.AddBookToStore(null);
+        }
+
+        public void AddToUnreleasedBox(IBook book)
+        {
+            this.NotInStoreBox.Items.Add(book.GetTitle());
         }
     }
 }

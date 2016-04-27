@@ -58,7 +58,7 @@ namespace FinalProject
 
         public bool EqualsBook(IBook b)
         {
-            return true;
+            return this.Title.Equals(b.GetTitle());
         }
     }
 }

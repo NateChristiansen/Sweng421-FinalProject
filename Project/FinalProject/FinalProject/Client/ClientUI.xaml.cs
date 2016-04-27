@@ -28,7 +28,7 @@ namespace FinalProject
 
         private void TabItemMouseDown(object sender, MouseButtonEventArgs e)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
     }
 }
