@@ -29,6 +29,11 @@ namespace FinalProject
             return newBooks;
         }
 
+        public bool InStock(string title)
+        {
+            return _stocks[title].GetQuantity() > 0;
+        }
+
         public List<IBook> Search(string searchQuery)
         {
             var keywords = Regex.Split(searchQuery.Trim(), @"\s+").ToList();
