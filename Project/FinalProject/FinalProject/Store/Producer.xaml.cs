@@ -38,9 +38,9 @@ namespace FinalProject
         {
             NotInStoreBox.Items.Clear(); // clear it
 
-            for (int i = 0; i < _unreleasedBooks.Count; i++)
+            foreach (IBook t in _unreleasedBooks)
             {
-                NotInStoreBox.Items.Add(_unreleasedBooks[i].Title);
+                NotInStoreBox.Items.Add(t.Title);
             }
         }
 
@@ -118,15 +118,15 @@ namespace FinalProject
                 )
                 );
 
-            for (int i = 0; i < _stocks.Count; i++)
+            foreach (Stock t in _stocks)
             {
-                _store.AddBook(_stocks[i]);
-                InStoreBox.Items.Add(_stocks[i].GetBook().Title);
+                _store.AddBook(t);
+                InStoreBox.Items.Add(t.GetBook().Title);
             }
 
-            for (int i = 0; i < _unreleasedBooks.Count; i++)
+            foreach (IBook t in _unreleasedBooks)
             {
-                NotInStoreBox.Items.Add(_unreleasedBooks[i].Title);
+                NotInStoreBox.Items.Add(t.Title);
             }
         }
 
