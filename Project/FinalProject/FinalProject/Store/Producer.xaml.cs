@@ -25,9 +25,33 @@ namespace FinalProject
 
         private void AddToStoreButton_Click(object sender, RoutedEventArgs e)
         {
-            IBook Book = _unreleasedBooks[NotInStoreBox.SelectedIndex];
-            _unreleasedBooks.Remove(Book);
-            AddBookToStore(Book);
+            IBook Book = _unreleasedBooks[NotInStoreBox.SelectedIndex]; // get the selected book
+            Stock s = new Stock(Book); // make new stock
+            _stocks.Add(s); // add to stock list
+            _unreleasedBooks.Remove(Book); // remove book from the unreleased books list
+            UpdateUnreleasedBookListBox(); // update the gui
+            UpdateReleasedBookListBox();
+            AddBookToStore(Book); // add book to the store
+        }
+
+        private void UpdateUnreleasedBookListBox()
+        {
+            NotInStoreBox.Items.Clear(); // clear it
+
+            for (int i = 0; i < _unreleasedBooks.Count; i++)
+            {
+                NotInStoreBox.Items.Add(_unreleasedBooks[i].Title);
+            }
+        }
+
+        private void UpdateReleasedBookListBox()
+        {
+            InStoreBox.Items.Clear(); // clear it
+
+            for (int i = 0; i < _stocks.Count; i++)
+            {
+                InStoreBox.Items.Add(_stocks[i].GetBook().Title);
+            }
         }
 
         private void InitBooks()
