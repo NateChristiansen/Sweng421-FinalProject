@@ -1,19 +1,19 @@
 ﻿using System;
 using System.Windows.Controls;
+using System.Windows.Media.Imaging;
 
 namespace FinalProject
 {
     public interface IBook
     {
-        Image GetCover();
-        string GetTitle();
-        string GetSummary();
-        string GetAuthor();
-        string GetGenre();
-        string GetIsbn();
-        string GetPublisher();
-        decimal GetPrice();
-
+        string Title { get; }
+        string Author { get; }
+        string Genre { get; }
+        string Publisher { get; }
+        decimal Price { get; }
+        BitmapImage Cover { get; }
+        string Summary { get; }
+        string Isbn { get; }
         bool EqualsBook(IBook b);
     }
 }

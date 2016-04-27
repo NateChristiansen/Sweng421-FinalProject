@@ -1,13 +1,14 @@
 ﻿using System.Net.Mime;
 using System.Windows.Controls;
+using System.Windows.Media.Imaging;
 
 namespace FinalProject
 {
     public class Magazine : AbstractBook
     {
-        protected int Issue;
+        public int Issue { get; protected set; }
 
-        public Magazine(Image cover, string title, string summary, string author, string genre,
+        public Magazine(BitmapImage cover, string title, string summary, string author, string genre,
             string isbn, string publisher, decimal price, int issue)
         {
             Cover = cover;

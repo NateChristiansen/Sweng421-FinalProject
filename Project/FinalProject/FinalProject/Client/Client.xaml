@@ -14,10 +14,11 @@
                     <Label Content="Browse" MouseLeftButtonDown="TabItemMouseDown"></Label>
                 </TabItem.Header>
                 <Grid Background="#FFE5E5E5">
-                    <DataGrid x:Name="BrowseGrid" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="233" Width="322"/>
-                    <Image x:Name="image" HorizontalAlignment="Left" Height="160" Margin="399,10,0,0" VerticalAlignment="Top" Width="107"/>
-                    <Button x:Name="AddToCartButton" Content="Add Selected To Cart" HorizontalAlignment="Left" Margin="206,248,0,0" VerticalAlignment="Top" Width="126"/>
-                    <TextBlock x:Name="BrowseDescriptionText" HorizontalAlignment="Left" Margin="337,175,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="93" Width="220"/>
+                    <DataGrid x:Name="BrowseGrid" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="233" Width="399" SelectionChanged="BrowseSelected" SelectionMode="Single" SelectionUnit="FullRow">
+                    </DataGrid>
+                    <Image x:Name="BrowseImage" HorizontalAlignment="Left" Height="160" Margin="437,10,0,0" VerticalAlignment="Top" Width="107"/>
+                    <Button x:Name="AddToCartButton" Content="Add Selected To Cart" HorizontalAlignment="Left" Margin="283,248,0,0" VerticalAlignment="Top" Width="126"/>
+                    <TextBlock x:Name="BrowseDescriptionText" HorizontalAlignment="Left" Margin="414,175,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="93" Width="143"/>
                     <Button x:Name="RefreshButton" Content="Refresh" HorizontalAlignment="Left" Margin="10,248,0,0" VerticalAlignment="Top" Width="75" Click="RefreshButton_Click"/>
                 </Grid>
             </TabItem>

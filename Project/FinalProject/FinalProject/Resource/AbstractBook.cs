@@ -1,64 +1,23 @@
 ﻿using System;
 using System.Windows.Controls;
+using System.Windows.Media.Imaging;
 
 namespace FinalProject
 {
     public abstract class AbstractBook : IBook
     {
-        protected Image Cover;
-        protected string Title;
-        protected string Summary;
-        protected string Author;
-        protected string Genre;
-        protected string Isbn;
-        protected string Publisher;
-        protected decimal Price;
-        protected int Stock;
-        protected Store Store;
-
-        public Image GetCover()
-        {
-            return Cover;
-        }
-
-        public string GetTitle()
-        {
-            return Title;
-        }
-
-        public string GetSummary()
-        {
-            return Summary;
-        }
-
-        public string GetAuthor()
-        {
-            return Author;
-        }
-
-        public string GetGenre()
-        {
-            return Genre;
-        }
-
-        public string GetIsbn()
-        {
-            return Isbn;
-        }
-
-        public string GetPublisher()
-        {
-            return Publisher;
-        }
-
-        public decimal GetPrice()
-        {
-            return Price;
-        }
+        public string Title { get; protected set; }
+        public string Author { get; protected set; }
+        public string Genre { get; protected set; }
+        public string Publisher { get; protected set; }
+        public decimal Price { get; protected set; }
+        public BitmapImage Cover { get; protected set; }
+        public string Summary { get; protected set; }
+        public string Isbn { get; protected set; }
 
         public bool EqualsBook(IBook b)
         {
-            return this.Title.Equals(b.GetTitle());
+            return Title.Equals(b.Title);
         }
     }
 }
