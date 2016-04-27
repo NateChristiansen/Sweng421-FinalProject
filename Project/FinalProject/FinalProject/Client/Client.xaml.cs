@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,6 +29,10 @@ namespace FinalProject
             Show();
         }
 
+        private void InitUi()
+        {
+        }
+
         private void TabItemMouseDown(object sender, MouseButtonEventArgs e)
         {
             var text = (sender as Label).Content.ToString();
@@ -49,12 +54,31 @@ namespace FinalProject
 
         private void RefreshButton_Click(object sender, RoutedEventArgs e)
         {
-
+            PopulateStore();
         }
 
         private void PopulateStore()
         {
-            _store.GetBooks().ForEach(b => BrowseGrid.Items.Add(b.GetTitle()));
+            BrowseGrid.Columns.Clear();
+            var title = new DataGridTextColumn {Header = "Title", Binding = new Binding("Title")};
+            var author = new DataGridTextColumn {Header = "Author", Binding = new Binding("Author")};
+            var genre = new DataGridTextColumn {Header = "Genre", Binding = new Binding("Genre")};
+            var publisher = new DataGridTextColumn {Header = "Publisher", Binding = new Binding("Publisher")};
+            var price = new DataGridTextColumn {Header = "Price", Binding = new Binding("Price")};
+            var books = _store.GetBooks();
+            BrowseGrid.Columns.Add(title);
+            BrowseGrid.Columns.Add(author);
+            BrowseGrid.Columns.Add(genre);
+            BrowseGrid.Columns.Add(publisher);
+            BrowseGrid.Columns.Add(price);
+            books.ForEach(b => BrowseGrid.Items.Add(b));
+        }
+
+        private void BrowseSelected(object sender, SelectionChangedEventArgs selectionChangedEventArgs)
+        {
+            var selected = (IBook) selectionChangedEventArgs.AddedItems[0];
+            BrowseDescriptionText.Text = selected.GetSummary();
+            BrowseImage.Source = selected.GetCover();
         }
     }
 }

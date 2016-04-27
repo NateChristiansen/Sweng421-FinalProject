@@ -1,10 +1,11 @@
 ﻿using System.Windows.Controls;
+using System.Windows.Media.Imaging;
 
 namespace FinalProject
 {
     public class Book : AbstractBook
     {
-        public Book(Image cover, string title, string summary, string author, string genre,
+        public Book(BitmapImage cover, string title, string summary, string author, string genre,
             string isbn, string publisher, decimal price)
         {
             Cover = cover;

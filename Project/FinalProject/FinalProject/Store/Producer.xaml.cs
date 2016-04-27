@@ -16,6 +16,7 @@ namespace FinalProject
         {
             InitializeComponent();
             _store = s;
+            InitUnreleasedBooks();
             Show();
         }
 
