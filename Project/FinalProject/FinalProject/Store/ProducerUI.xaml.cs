@@ -16,7 +16,7 @@ namespace FinalProject
 
         private void AddToStoreButton_Click(object sender, RoutedEventArgs e)
         {
-            _producer.AddBookToStore();
+            _producer.AddBookToStore(null);
         }
     }
 }
