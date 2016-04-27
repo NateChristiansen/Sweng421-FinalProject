@@ -5,8 +5,24 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FinalProject"
         mc:Ignorable="d"
-        Title="ProducerUI" Height="350" Width="525">
+        Title="ProducerUI" Height="369.333" Width="569">
     <Grid>
-        
+        <TabControl x:Name="tabControl" HorizontalAlignment="Left" Height="318" Margin="10,10,0,0" VerticalAlignment="Top" Width="541">
+            <TabItem Header="Unreleased">
+                <Grid Background="#FFE5E5E5">
+                    <ListBox x:Name="NotInStoreBox" HorizontalAlignment="Left" Height="245" Margin="10,10,0,0" VerticalAlignment="Top" Width="290"/>
+                    <Button x:Name="AddToStoreButton" Content="Add Selected To Store" HorizontalAlignment="Left" Margin="170,260,0,0" VerticalAlignment="Top" Width="130" Click="AddToStoreButton_Click"/>
+                    <Image x:Name="PreviewImage" HorizontalAlignment="Left" Height="258" Margin="305,10,0,0" VerticalAlignment="Top" Width="220"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Released">
+                <Grid Background="#FFE5E5E5">
+                    <ListBox x:Name="InStoreBox" HorizontalAlignment="Left" Height="245" Margin="10,10,0,0" VerticalAlignment="Top" Width="290"/>
+                    <Button x:Name="UpdateQuantityButton" Content="Update Quantity" HorizontalAlignment="Left" Margin="170,260,0,0" VerticalAlignment="Top" Width="130"/>
+                    <Image x:Name="PreviewStoreImage" HorizontalAlignment="Left" Height="258" Margin="305,10,0,0" VerticalAlignment="Top" Width="220"/>
+                </Grid>
+            </TabItem>
+        </TabControl>
+
     </Grid>
 </Window>

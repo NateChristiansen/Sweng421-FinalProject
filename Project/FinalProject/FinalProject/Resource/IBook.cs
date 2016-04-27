@@ -14,5 +14,6 @@ namespace FinalProject
         string GetPublisher();
         decimal GetPrice();
 
+        bool EqualsBook(IBook b);
     }
 }

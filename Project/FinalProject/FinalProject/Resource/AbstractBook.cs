@@ -55,5 +55,10 @@ namespace FinalProject
         {
             return Price;
         }
+
+        public bool EqualsBook(IBook b)
+        {
+            return true;
+        }
     }
 }

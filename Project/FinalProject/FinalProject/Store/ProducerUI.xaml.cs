@@ -13,5 +13,10 @@ namespace FinalProject
             InitializeComponent();
             _producer = p;
         }
+
+        private void AddToStoreButton_Click(object sender, RoutedEventArgs e)
+        {
+            _producer.AddBookToStore();
+        }
     }
 }
