@@ -17,9 +17,13 @@
             </TabItem>
             <TabItem Header="Released">
                 <Grid Background="#FFE5E5E5">
-                    <ListBox x:Name="InStoreBox" HorizontalAlignment="Left" Height="245" Margin="10,10,0,0" VerticalAlignment="Top" Width="290"/>
-                    <Button x:Name="UpdateQuantityButton" Content="Update Quantity" HorizontalAlignment="Left" Margin="170,260,0,0" VerticalAlignment="Top" Width="130"/>
-                    <Image x:Name="PreviewStoreImage" HorizontalAlignment="Left" Height="258" Margin="305,10,0,0" VerticalAlignment="Top" Width="220"/>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="31*"/>
+                        <ColumnDefinition Width="504*"/>
+                    </Grid.ColumnDefinitions>
+                    <ListBox x:Name="InStoreBox" HorizontalAlignment="Left" Height="245" Margin="10,10,0,0" VerticalAlignment="Top" Width="290" Grid.ColumnSpan="2"/>
+                    <Button x:Name="UpdateQuantityButton" Content="Update Quantity" HorizontalAlignment="Left" Margin="139.155,260,0,0" VerticalAlignment="Top" Width="130" Click="UpdateQuantityButton_Click" Grid.Column="1"/>
+                    <Image x:Name="PreviewStoreImage" HorizontalAlignment="Left" Height="258" Margin="274.155,10,0,0" VerticalAlignment="Top" Width="220" Grid.Column="1"/>
                 </Grid>
             </TabItem>
         </TabControl>
