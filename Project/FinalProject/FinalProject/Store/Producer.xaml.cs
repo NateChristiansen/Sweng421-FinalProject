@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media.Imaging;
 
 namespace FinalProject
 {
@@ -18,7 +19,6 @@ namespace FinalProject
         {
             InitializeComponent();
             _store = s;
-            InitUnreleasedBooks();
             Show();
             InitBooks();
         }
@@ -33,9 +33,8 @@ namespace FinalProject
         private void InitBooks()
         {
             // UNRELEASED BOOKS
-            _unreleasedBooks.Add(
-                new Book(
-                    new Image(),
+                _unreleasedBooks.Add(new Book(
+                    new BitmapImage(),
                     "Harry Potter",
                     "Wizard boy wonder.",
                     "J.K. Rowling",
@@ -47,7 +46,7 @@ namespace FinalProject
 
             _unreleasedBooks.Add(
                 new Book(
-                    new Image(),
+                    new BitmapImage(),
                     "The Hunger Games",
                     "Kids battle to the death.",
                     "Suzanne Collins",
@@ -58,7 +57,7 @@ namespace FinalProject
                 );
 
             _unreleasedBooks.Add(new Book(
-                    new Image(),
+                    new BitmapImage(),
                     "Paper Towns",
                     "Sappy story",
                     "John Green",
@@ -71,7 +70,7 @@ namespace FinalProject
             // RELEASED BOOKS
             _stocks.Add(new Stock(
                 new Book(
-                    new Image(),
+                    new BitmapImage(),
                     "The Martian",
                     "Man goes to space, grows potatoes, does well for himself",
                     "Andy Weir",
@@ -84,7 +83,7 @@ namespace FinalProject
 
             _stocks.Add(new Stock(
                 new Book(
-                    new Image(),
+                    new BitmapImage(),
                     "To Kill a Mockingbird",
                     "Good book",
                     "Harper Lee",
@@ -98,12 +97,12 @@ namespace FinalProject
             for (int i = 0; i < _stocks.Count; i++)
             {
                 _store.AddBook(_stocks[i]);
-                InStoreBox.Items.Add(_stocks[i].GetBook().GetTitle());
+                InStoreBox.Items.Add(_stocks[i].GetBook().Title);
             }
 
             for (int i = 0; i < _unreleasedBooks.Count; i++)
             {
-                NotInStoreBox.Items.Add(_unreleasedBooks[i].GetTitle());
+                NotInStoreBox.Items.Add(_unreleasedBooks[i].Title);
             }
         }
 
@@ -122,7 +121,7 @@ namespace FinalProject
             {
                 // grab the user's input
                 string updateString = Microsoft.VisualBasic.Interaction.InputBox("Please enter a number to update the selected book's quantity", 
-                    _stocks[InStoreBox.SelectedIndex].GetBook().GetTitle(), "", -1, -1);
+                    _stocks[InStoreBox.SelectedIndex].GetBook().Title, "", -1, -1);
                 try
                 {
                     // try using the user's input as the update number

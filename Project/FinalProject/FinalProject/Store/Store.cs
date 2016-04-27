@@ -45,10 +45,10 @@ namespace FinalProject
 
         private static bool Compare(IBook b, string keyword)
         {
-            return b.GetAuthor().ToLower().Contains(keyword) ||
-                   b.GetGenre().ToLower().Contains(keyword) ||
-                   b.GetPublisher().ToLower().Contains(keyword) ||
-                   b.GetTitle().ToLower().Contains(keyword);
+            return b.Author.ToLower().Contains(keyword) ||
+                   b.Genre.ToLower().Contains(keyword) ||
+                   b.Publisher.ToLower().Contains(keyword) ||
+                   b.Title.ToLower().Contains(keyword);
         }
 
         public void Subscribe(IMember subscriber, string title)
@@ -62,7 +62,7 @@ namespace FinalProject
 
         public void AddBook(Stock bookstock)
         {
-            _stocks.Add(bookstock.GetBook().GetTitle(), bookstock);
+            _stocks.Add(bookstock.GetBook().Title, bookstock);
         }
     }
 }
