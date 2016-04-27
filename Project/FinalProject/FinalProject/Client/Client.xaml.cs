@@ -42,7 +42,7 @@ namespace FinalProject
         {
             var query = SearchBox.Text;
             SearchResultList.Items.Clear();
-            _store.Search(query).ForEach(b => SearchResultList.Items.Add(b.GetTitle()));
+            _store.Search(query).ForEach(b => SearchResultList.Items.Add(b.Title));
         }
 
         private void GoToStoreButton_Click(object sender, RoutedEventArgs e)
@@ -77,8 +77,8 @@ namespace FinalProject
         private void BrowseSelected(object sender, SelectionChangedEventArgs selectionChangedEventArgs)
         {
             var selected = (IBook) selectionChangedEventArgs.AddedItems[0];
-            BrowseDescriptionText.Text = selected.GetSummary();
-            BrowseImage.Source = selected.GetCover();
+            BrowseDescriptionText.Text = selected.Summary;
+            BrowseImage.Source = selected.Cover;
         }
     }
 }

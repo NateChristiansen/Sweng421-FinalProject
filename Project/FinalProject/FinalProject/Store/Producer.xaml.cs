@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media.Imaging;
 
 namespace FinalProject
 {
@@ -27,14 +28,14 @@ namespace FinalProject
 
         public void AddToUnreleasedBox(IBook book)
         {
-            this.NotInStoreBox.Items.Add(book.GetTitle());
+            this.NotInStoreBox.Items.Add(book.Title);
         }
 
         private void InitUnreleasedBooks()
         {
             _stocks.Add(new Stock(
                 new Book(
-                    new Image(),
+                    new BitmapImage(),
                     "Harry Potter",
                     "Wizard boy wonder.",
                     "J.K. Rowling",
@@ -48,7 +49,7 @@ namespace FinalProject
 
             _stocks.Add(new Stock(
                 new Book(
-                    new Image(),
+                    new BitmapImage(),
                     "The Hunger Games",
                     "Kids battle to the death.",
                     "Suzanne Collins",
@@ -61,7 +62,7 @@ namespace FinalProject
 
             _stocks.Add(new Stock(
                 new Book(
-                    new Image(),
+                    new BitmapImage(),
                     "Paper Towns",
                     "Sappy story",
                     "John Green",
