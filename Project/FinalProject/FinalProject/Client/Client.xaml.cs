@@ -31,6 +31,17 @@ namespace FinalProject
             _store = s;
             PopulateStore();
             Show();
+            /*_users.Users.Add(new User
+            {
+                Wallet = 100000,
+                Username = "test",
+                FirstName = "Nathan",
+                LastName = "Christiansen",
+                Email = "natechristiansen42@gmail.com",
+                Subs = "",
+                Password = "test"
+            });
+            _users.SaveChanges();*/
         }
 
         private void InitUi()

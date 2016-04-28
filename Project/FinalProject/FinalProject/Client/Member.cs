@@ -60,7 +60,7 @@ namespace FinalProject
                 Email = user.Email,
                 Username = user.Username,
                 Wallet = user.Wallet,
-                SubscriberList = user.Subs.Split('~').ToList()
+                SubscriberList = user.Subs != string.Empty ? user.Subs.Split('~').ToList() : new List<string>()
             };
             return mem;
         }
