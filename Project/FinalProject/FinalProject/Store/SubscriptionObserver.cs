@@ -4,13 +4,17 @@ namespace FinalProject
 {
     public class SubscriptionObserver
     {
-        private readonly Dictionary<string, List<IMember>> _subscribers = new Dictionary<string, List<IMember>>();
+        private readonly Dictionary<string, List<Member>> _subscribers = new Dictionary<string, List<Member>>();
         public void NotifySubscribers(string title)
         {
-            _subscribers[title].ForEach(s => s.Notify(title));
+            _subscribers[title].ForEach(s =>
+            {
+                if (_subscribers.ContainsKey(title))
+                    s.Notify(title);
+            });
         }
 
-        public void AddSubscription(string title, IMember member)
+        public void AddSubscription(string title, Member member)
         {
             if (_subscribers.ContainsKey(title))
             {
@@ -18,7 +22,7 @@ namespace FinalProject
             }
             else
             {
-                var list = new List<IMember> {member};
+                var list = new List<Member> {member};
                 _subscribers.Add(title, list);
             }
         }
