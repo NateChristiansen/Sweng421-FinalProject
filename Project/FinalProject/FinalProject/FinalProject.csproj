@@ -36,8 +36,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -61,10 +70,8 @@
       <DependentUpon>Client.xaml</DependentUpon>
     </Compile>
     <Compile Include="Client\AbstractFilter.cs" />
-    <Compile Include="Client\AbstractMember.cs" />
     <Compile Include="Client\AuthorFilter.cs" />
     <Compile Include="Client\GenreFilter.cs" />
-    <Compile Include="Client\IMember.cs" />
     <Compile Include="Client\ISearchFilter.cs" />
     <Compile Include="Client\Member.cs" />
     <Compile Include="Client\TitleFilter.cs" />
@@ -78,6 +85,8 @@
     <Compile Include="Store\BookFactory.cs" />
     <Compile Include="Store\Store.cs" />
     <Compile Include="Store\SubscriptionObserver.cs" />
+    <Compile Include="UserDatabase\User.cs" />
+    <Compile Include="UserDatabase\UserDatabase.cs" />
     <Page Include="Client\Client.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -113,6 +122,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

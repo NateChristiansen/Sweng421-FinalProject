@@ -56,7 +56,7 @@ namespace FinalProject
                    b.Title.ToLower().Contains(keyword);
         }
 
-        public void Subscribe(IMember subscriber, string title)
+        public void Subscribe(Member subscriber, string title)
         {
             _subs.AddSubscription(title, subscriber);
         }
@@ -68,6 +68,7 @@ namespace FinalProject
         public void AddBook(Stock bookstock)
         {
             _stocks.Add(bookstock.GetBook().Title, bookstock);
+            bookstock.SetStore(this);
         }
     }
 }

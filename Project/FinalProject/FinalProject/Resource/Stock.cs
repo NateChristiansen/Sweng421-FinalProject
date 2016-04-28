@@ -31,6 +31,7 @@
             _stockLock.WriteLock();
             _stock += amt;
             _stockLock.Done();
+            _store.UpdateSubs(_book.Title);
         }
 
         public int GetQuantity()
