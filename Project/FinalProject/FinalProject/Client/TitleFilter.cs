@@ -8,7 +8,7 @@ namespace FinalProject
 
         public TitleFilter(ISearchFilter filter)
         {
-            this._filter = filter;
+            _filter = filter;
         }
 
         public void Apply(string filterText)

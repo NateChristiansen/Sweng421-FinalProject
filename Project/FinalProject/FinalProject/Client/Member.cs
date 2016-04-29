@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace FinalProject
 {
@@ -49,26 +48,7 @@ namespace FinalProject
         }
         private Member()
         {
-        }
 
-        public static Member MapFromDb(User user)
-        {
-            var mem = new Member
-            {
-                FirstName = user.FirstName,
-                LastName = user.LastName,
-                Email = user.Email,
-                Username = user.Username,
-                Wallet = user.Wallet,
-                SubscriberList = user.Subs != string.Empty ? user.Subs.Split('~').ToList() : new List<string>()
-            };
-            return mem;
-        }
-
-        public void UpdateUser(User user)
-        {
-            user.Wallet = Wallet;
-            user.Subs = string.Join("~", SubscriberList);
         }
     }
 }

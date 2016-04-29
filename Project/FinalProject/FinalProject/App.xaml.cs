@@ -1,6 +1,4 @@
-﻿using System.Windows;
-
-namespace FinalProject
+﻿namespace FinalProject
 {
     /// <summary>
     /// Interaction logic for App.xaml

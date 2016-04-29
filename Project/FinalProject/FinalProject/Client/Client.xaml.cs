@@ -1,17 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Dynamic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using Microsoft.VisualBasic;
 
 namespace FinalProject
@@ -23,25 +14,14 @@ namespace FinalProject
     {
         private readonly Store _store;
         private readonly List<string> _cart = new List<string>();
-        private Member _user = null;
-        private readonly UserDatabase _users = new UserDatabase();
+        private Member _user;
+
         public Client(Store s)
         {
             InitializeComponent();
             _store = s;
             PopulateStore();
             Show();
-            /*_users.Users.Add(new User
-            {
-                Wallet = 100000,
-                Username = "test",
-                FirstName = "Nathan",
-                LastName = "Christiansen",
-                Email = "natechristiansen42@gmail.com",
-                Subs = "",
-                Password = "test"
-            });
-            _users.SaveChanges();*/
         }
 
         private void InitUi()
@@ -126,25 +106,11 @@ namespace FinalProject
 
         public void Login()
         {
-            var username = Interaction.InputBox("Enter your username", "Username");
-            var password = Interaction.InputBox("Enter your password", "Password");
-            var us = _users.Users.ToList().FirstOrDefault(u => u.Username == username && u.Password == password);
-            if (us == null)
-            {
-
-            }
-            else
-            {
-                _user = Member.MapFromDb(us);
-                LoginButton.Content = "Logout";
-            }
+            LoginButton.Content = "Logout";
         }
 
         public void Logout()
         {
-            var u = _users.Users.ToList().First(us => us.Username == _user.GetUsername());
-            _user.UpdateUser(u);
-            _users.SaveChanges();
             _user = null;
             LoginButton.Content = "Login";
         }

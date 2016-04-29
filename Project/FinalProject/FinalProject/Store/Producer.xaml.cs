@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Media.Imaging;
+using Microsoft.VisualBasic;
 
 namespace FinalProject
 {
@@ -144,7 +144,7 @@ namespace FinalProject
             if (InStoreBox.SelectedIndex != -1)
             {
                 // grab the user's input
-                string updateString = Microsoft.VisualBasic.Interaction.InputBox("Please enter a number to update the selected book's quantity", 
+                string updateString = Interaction.InputBox("Please enter a number to update the selected book's quantity", 
                     _stocks[InStoreBox.SelectedIndex].GetBook().Title, "", -1, -1);
                 try
                 {
