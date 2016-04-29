@@ -1,0 +1,6 @@
+filters
+notifications and subscriptions
+logging in and member storage
+book covers
+add some magazines?
+move stocks from store to factory
