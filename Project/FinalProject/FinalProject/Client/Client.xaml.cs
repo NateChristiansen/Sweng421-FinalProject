@@ -95,7 +95,14 @@ namespace FinalProject
             BrowseGrid.Columns.Add(genre);
             BrowseGrid.Columns.Add(publisher);
             BrowseGrid.Columns.Add(price);
-            _store.GetBooks().ForEach(b => BrowseGrid.Items.Add(b));
+
+            foreach (IBook book in _store.GetBooks())
+            {
+                if (!BrowseGrid.Items.Contains(book))
+                {
+                    BrowseGrid.Items.Add(book);
+                }
+            }
         }
 
         private void BrowseSelected(object sender, SelectionChangedEventArgs selectionChangedEventArgs)
