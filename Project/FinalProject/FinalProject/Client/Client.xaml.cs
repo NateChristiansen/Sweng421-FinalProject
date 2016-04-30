@@ -1,9 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
+using System.Windows.Forms;
 using System.Windows.Input;
 using Microsoft.VisualBasic;
+using Binding = System.Windows.Data.Binding;
+using Label = System.Windows.Controls.Label;
+using MessageBox = System.Windows.MessageBox;
 
 namespace FinalProject
 {
@@ -113,16 +119,86 @@ namespace FinalProject
 
         public void Login()
         {
-            LoginButton.Content = "Logout";
+            DialogResult dr = (DialogResult) MessageBox.Show("Click yes to register, no to login", "Register or Login",
+                MessageBoxButton.YesNo);
+
+            // perform registration
+            if (dr == System.Windows.Forms.DialogResult.Yes)
+            {
+                string first = Interaction.InputBox("Please enter your first name:",
+                    "First", "", -1, -1);
+
+                string last = Interaction.InputBox("Please enter your last name:",
+                    "Last", "", -1, -1);
+
+                string userName = Interaction.InputBox("Please enter your username:",
+                    "Username", "", -1, -1);
+
+                string passWord = Interaction.InputBox("Please enter your password:",
+                    "Username", "", -1, -1);
+
+
+                if (!first.Equals("") && !last.Equals("") && !userName.Equals("") && !passWord.Equals(""))
+                {
+                    _user = new Member(first, last, userName, passWord, (decimal)50.00);
+                    _user.CreateUserFile();
+
+                    LoggedInLabel.Content = "Logged in as: " + _user.GetUsername();
+
+                    LoginButton.Content = "Logout";
+                }
+
+            }
+            else
+            {
+                string userName = Interaction.InputBox("Please enter your username:", 
+                    "Username", "", -1, -1);
+
+                string passWord = Interaction.InputBox("Please enter your password:",
+                    "Username", "", -1, -1);
+
+                var directoryPath = Path.GetDirectoryName(Path.GetDirectoryName(System.IO.Directory.GetCurrentDirectory()));
+                directoryPath = Path.Combine(directoryPath, "RegisteredUsers");
+
+                bool userFound = false;
+
+                foreach (string file in Directory.EnumerateFiles(directoryPath, "*.txt"))
+                {
+                    string[] fileLines = File.ReadAllLines(file);
+
+                    if (fileLines[0].Equals(userName) && fileLines[1].Equals(passWord))
+                    {
+                        decimal wallet = Decimal.Parse(fileLines[2]);
+                        _user = new Member(userName, passWord, wallet);
+
+                        LoggedInLabel.Content = "Logged in as: " + _user.GetUsername();
+
+                        userFound = true;
+
+                        LoginButton.Content = "Logout";
+                    }
+                }
+
+                if (!userFound)
+                {
+                    MessageBox.Show("User does not exist. Please check your credentials.");
+                }
+
+            }
+
+            
         }
 
         public void Logout()
         {
             _user = null;
+
+            LoggedInLabel.Content = "";
+
             LoginButton.Content = "Login";
         }
 
-        private void LoginButton_Clicked(object sender, MouseButtonEventArgs e)
+        private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
             if (_user == null)
             {

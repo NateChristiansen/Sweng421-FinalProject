@@ -67,7 +67,7 @@
             </TabItem>
         </TabControl>
         <Label x:Name="LoggedInLabel" Content="" HorizontalAlignment="Left" Margin="445,7,0,0" VerticalAlignment="Top" Width="58"/>
-        <Button x:Name="LoginButton" Content="Login" HorizontalAlignment="Left" Margin="1180,10,0,0" VerticalAlignment="Top" Width="82" MouseDown="LoginButton_Clicked" Height="40"/>
+        <Button x:Name="LoginButton" Content="Login" HorizontalAlignment="Left" Margin="1180,10,0,0" VerticalAlignment="Top" Width="82" Height="40" Click="LoginButton_Click"/>
 
     </Grid>
 </Window>

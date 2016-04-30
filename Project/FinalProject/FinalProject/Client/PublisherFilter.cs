@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace FinalProject
 {
@@ -10,7 +11,8 @@ namespace FinalProject
         {
             _filter = filter;
         }
-        public void Apply(string filterText)
+
+        public List<IBook> Apply(string filterText, List<IBook> list)
         {
             throw new NotImplementedException();
         }
