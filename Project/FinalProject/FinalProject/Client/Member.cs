@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Windows;
+using System.Windows.Forms.VisualStyles;
 
 namespace FinalProject
 {
@@ -68,7 +69,7 @@ namespace FinalProject
         {
             Notifications.Add(new Notification
             {
-                Text = $"{book.Title} by {book.Author} is now in stock!",
+                Text = string.Format("{0} by {1} is now in stock!", book.Title, book.Author),
                 Time = DateTime.Now
             });
         }
