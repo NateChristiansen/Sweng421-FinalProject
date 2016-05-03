@@ -20,10 +20,10 @@ namespace FinalProject
         {
             titles.ForEach(t =>
             {
-                if (_stocks[t].GetQuantity() > 0)
-                {
-                    user.OwnedBooks.Add(_factory.GetBook(t));
-                }
+                if (_stocks[t].GetQuantity() <= 0) return;
+                var b = _factory.GetBook(t);
+                user.OwnedBooks.Add(b);
+                user.Wallet -= b.Price;
             });
         }
 

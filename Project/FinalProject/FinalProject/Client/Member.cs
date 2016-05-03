@@ -5,6 +5,7 @@ using System.Windows;
 
 namespace FinalProject
 {
+    [Serializable]
     public class Member
     {
         public decimal Wallet { get; set; }
@@ -15,28 +16,32 @@ namespace FinalProject
         public string Password { get; set; }
         public List<string> SubscriberList = new List<string>();
         public List<IBook> OwnedBooks = new List<IBook>();
+<<<<<<< HEAD
+=======
+        public List<string> Notifications = new List<string>();
+>>>>>>> 1f3b632e6ae7c112f2723ef68316529dc64b9479
 
         public Member(string first, string last, string user, string pass, decimal wallet)
         {
-            this.Username = user;
-            this.LastName = last;
-            this.Password = pass;
-            this.FirstName = first;
-            this.Wallet = wallet;
+            Username = user;
+            LastName = last;
+            Password = pass;
+            FirstName = first;
+            Wallet = wallet;
         }
 
         public Member(string userName, string passWord, decimal wallet)
         {
-            this.Username = userName;
-            this.Password = passWord;
-            this.Wallet = wallet;
+            Username = userName;
+            Password = passWord;
+            Wallet = wallet;
         }
 
         // creates the user's registration file
         public void CreateUserFile()
         {
             string fileName = FirstName + LastName + ".txt";
-            var directoryPath = Path.GetDirectoryName(Path.GetDirectoryName(System.IO.Directory.GetCurrentDirectory()));
+            var directoryPath = Path.GetDirectoryName(Path.GetDirectoryName(Directory.GetCurrentDirectory()));
             var fullPath = Path.Combine(directoryPath, "RegisteredUsers");
             var filePath = Path.Combine(fullPath, fileName);
             if (!File.Exists(filePath))
