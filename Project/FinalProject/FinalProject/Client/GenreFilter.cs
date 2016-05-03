@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace FinalProject
 {
@@ -14,7 +15,7 @@ namespace FinalProject
 
         public List<IBook> Apply(string filterText, List<IBook> list)
         {
-            throw new NotImplementedException();
+            return list.Where(b => b.Genre.ToLower().Contains(filterText.ToLower())).ToList();
         }
     }
 }

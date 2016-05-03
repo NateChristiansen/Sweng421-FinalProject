@@ -7,6 +7,7 @@ namespace FinalProject
         private readonly Dictionary<string, List<Member>> _subscribers = new Dictionary<string, List<Member>>();
         public void NotifySubscribers(string title)
         {
+            if (!_subscribers.ContainsKey(title)) return;
             _subscribers[title].ForEach(s =>
             {
                 if (_subscribers.ContainsKey(title))
