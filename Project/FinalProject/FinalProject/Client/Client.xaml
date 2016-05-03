@@ -80,8 +80,8 @@
                     <Label Content="Notifications" MouseLeftButtonDown="TabItemMouseDown"></Label>
                 </TabItem.Header>
                 <Grid Background="#FFE5E5E5">
-                    <Button x:Name="ClearSelectedNotificationButton" Content="Clear Selected" HorizontalAlignment="Left" Margin="1071,571,0,0" VerticalAlignment="Top" Width="90"/>
-                    <Button x:Name="ClearAllNotificationButton" Content="Clear All" HorizontalAlignment="Left" Margin="1166,571,0,0" VerticalAlignment="Top" Width="90"/>
+                    <Button x:Name="ClearSelectedNotificationButton" Content="Clear Selected" HorizontalAlignment="Left" Margin="1071,571,0,0" VerticalAlignment="Top" Width="90" Click="ClearSelectedNotificationButton_Click"/>
+                    <Button x:Name="ClearAllNotificationButton" Content="Clear All" HorizontalAlignment="Left" Margin="1166,571,0,0" VerticalAlignment="Top" Width="90" Click="ClearAllNotificationButton_Click"/>
                     <DataGrid x:Name="NotificationGrid" AutoGenerateColumns="False" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="556" Width="1246" SelectionMode="Single" SelectionUnit="FullRow">
                         <DataGrid.Resources>
                             <Style TargetType="DataGridCell">
@@ -90,6 +90,7 @@
                             </Style>
                         </DataGrid.Resources>
                     </DataGrid>
+                    <Button x:Name="AddNotificationToCart" Content="Add Selected To Cart" HorizontalAlignment="Left" Margin="940,571,0,0" VerticalAlignment="Top" Width="126" Click="AddNotificationToCart_Click"/>
                 </Grid>
             </TabItem>
         </TabControl>

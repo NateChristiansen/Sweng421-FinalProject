@@ -194,7 +194,6 @@ namespace FinalProject
 
             if (first.Equals("") || last.Equals("") || userName.Equals("") || passWord.Equals("")) return;
             _user = new Member(first, last, userName, passWord, (decimal)50.00);
-            _user.CreateUserFile();
 
             LoggedInLabel.Content = "Logged in as: " + _user.GetUsername();
 
@@ -350,6 +349,28 @@ namespace FinalProject
         {
             if (_user == null) return;
             Interaction.MsgBox(_user.OwnedBooks.Select(b => b.Title).ToString());
+        }
+
+        private void ClearAllNotificationButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (_user == null) return;
+            _user.Notifications.Clear();
+            NotificationGrid.ClearValue(ItemsControl.ItemsSourceProperty);
+            NotificationGrid.ItemsSource = _user.Notifications;
+        }
+
+        private void ClearSelectedNotificationButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (_user == null) return;
+            _user.Notifications.Remove((Member.Notification) NotificationGrid.SelectedItem);
+            NotificationGrid.ClearValue(ItemsControl.ItemsSourceProperty);
+            NotificationGrid.ItemsSource = _user.Notifications;
+        }
+
+        private void AddNotificationToCart_Click(object sender, RoutedEventArgs e)
+        {
+            var notification = ((Member.Notification) NotificationGrid.SelectedItem);
+            _cart.Add(notification.Book);
         }
     }
 }
