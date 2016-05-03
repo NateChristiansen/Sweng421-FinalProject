@@ -179,7 +179,6 @@ namespace FinalProject
         {
             var first = lrw.RegNameBox.Text;
 
-<<<<<<< HEAD
             var last = lrw.RegLastNameBox.Text;
 
             var userName = lrw.RegUserBox.Text;
@@ -219,40 +218,6 @@ namespace FinalProject
                 userFound = true;
 
                 LoginButton.Content = "Logout";
-            }
-
-            if (!userFound)
-            {
-                MessageBox.Show("User does not exist. Please check your credentials.");
-=======
-            // perform registration
-            if (dr == System.Windows.Forms.DialogResult.Yes)
-            {
-                var first = Interaction.InputBox("Please enter your first name:", "First");
-                var last = Interaction.InputBox("Please enter your last name:", "Last");
-                var userName = Interaction.InputBox("Please enter your username:", "Username");
-                var passWord = Interaction.InputBox("Please enter your password:", "Password");
-
-                if (first.Equals("") || last.Equals("") || userName.Equals("") || passWord.Equals("")) return;
-                _user = new Member(first, last, userName, passWord, (decimal)50.00);
-                _users.Add(_user);
-                //_user.CreateUserFile();
-
-                LoggedInLabel.Content = "Logged in as: " + _user.GetUsername();
-                LoginButton.Content = "Logout";
-            }
-            else
-            {
-                var userName = Interaction.InputBox("Please enter your username:", "Username");
-                var passWord = Interaction.InputBox("Please enter your password:", "Username");
-
-                _user = _users.FirstOrDefault(u => u.Username.Equals(userName) && u.Password.Equals(passWord));
-
-                if (_user == null)
-                {
-                    MessageBox.Show("User does not exist. Please check your credentials.");
-                }
->>>>>>> 1f3b632e6ae7c112f2723ef68316529dc64b9479
             }
         }
 
