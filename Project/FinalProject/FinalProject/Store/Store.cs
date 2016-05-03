@@ -16,17 +16,15 @@ namespace FinalProject
             return _stocks.Values.Select(s => s.GetBook()).ToList();
         }
 
-        public List<IBook> PurchaseBooks(List<string> titles, decimal wallet)
+        public void PurchaseBooks(List<string> titles, Member user)
         {
-            var newBooks = new List<IBook>();
             titles.ForEach(t =>
             {
                 if (_stocks[t].GetQuantity() > 0)
                 {
-                    newBooks.Add(_factory.GetBook(t));
+                    user.OwnedBooks.Add(_factory.GetBook(t));
                 }
             });
-            return newBooks;
         }
 
         public bool InStock(string title)

@@ -67,13 +67,13 @@ namespace FinalProject
 
         private void UpdateUnreleasedBookListBox()
         {
-            UnreleasedGrid.Items.Clear(); // clear it
+            UnreleasedGrid.ClearValue(ItemsControl.ItemsSourceProperty); // clear it
             UnreleasedGrid.ItemsSource = _unreleasedBooks;
         }
 
         private void UpdateReleasedBookListBox()
         {
-            ReleasedGrid.Items.Clear(); // clear it
+            ReleasedGrid.ClearValue(ItemsControl.ItemsSourceProperty); // clear it
             ReleasedGrid.ItemsSource = _stocks.Select((stock => stock.GetBook()));
         }
 

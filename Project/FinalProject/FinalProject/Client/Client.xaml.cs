@@ -78,7 +78,7 @@ namespace FinalProject
             switch (text)
             {
                 case "Cart":
-                    //CartGrid.Items.Clear();
+                    CartGrid.ClearValue(ItemsControl.ItemsSourceProperty);
                     CartGrid.ItemsSource = _cart;
                     decimal d = 0;
                     _cart.ForEach(c => d += c.Price);
@@ -132,20 +132,24 @@ namespace FinalProject
 
         private void AddToCart(IBook book)
         {
-            if (_store.InStock(book.Title))
+            if (CheckStore(book))
                 _cart.Add(book);
+        }
+
+        private bool CheckStore(IBook book)
+        {
+            if (_store.InStock(book.Title))
+                return true;
+            var result =
+                Interaction.MsgBox(
+                    "This item is not currently in stock, would you like to subscribe to be notified when it becomes available?",
+                    MsgBoxStyle.YesNo, "Out of Stock");
+            if (result == MsgBoxResult.No) return false;
+            if (_user != null)
+                _store.Subscribe(_user, book.Title);
             else
-            {
-                var result =
-                    Interaction.MsgBox(
-                        "This item is not currently in stock, would you like to subscribe to be notified when it becomes available?",
-                        MsgBoxStyle.YesNo, "Out of Stock");
-                if (result == MsgBoxResult.No) return;
-                if (_user != null)
-                    _store.Subscribe(_user, book.Title);
-                else
-                    Interaction.MsgBox("Please log in before subscribing.", MsgBoxStyle.OkOnly, "Not Logged In");
-            }
+                Interaction.MsgBox("Please log in before subscribing.", MsgBoxStyle.OkOnly, "Not Logged In");
+            return false;
         }
 
         public void Login()
@@ -259,14 +263,17 @@ namespace FinalProject
         {
             var book = (IBook) CartGrid.SelectedItem;
             if (book == null) return;
-            CartGrid.Items.Remove(book);
             _cart.Remove(book);
+            CartGrid.ClearValue(ItemsControl.ItemsSourceProperty);
+            CartGrid.ItemsSource = _cart;
+            decimal d = 0;
+            _cart.ForEach(c => d += c.Price);
+            TotalLabel.Content = "$" + d;
         }
 
         private void ClearAllButton_Click(object sender, RoutedEventArgs e)
         {
-            CartGrid.Items.Clear();
-            _cart.Clear();
+            ClearCart();
         }
 
         private void CartSelected(object sender, SelectionChangedEventArgs e)
@@ -275,6 +282,32 @@ namespace FinalProject
             if (selected == null) return;
             CartDescriptionText.Text = selected.Summary;
             CartPreview.Source = selected.Cover;
+        }
+
+        private void CheckOutButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (_user == null)
+            {
+                Login();
+                return;
+            }
+            _cart.ForEach(b =>
+            {
+                if (!CheckStore(b))
+                    _cart.Remove(b);
+            });
+            _store.PurchaseBooks(_cart.Select(b => b.Title).ToList(), _user);
+            ClearCart();
+        }
+
+        private void ClearCart()
+        {
+            _cart.Clear();
+            CartGrid.ClearValue(ItemsControl.ItemsSourceProperty);
+            CartGrid.ItemsSource = _cart;
+            decimal d = 0;
+            _cart.ForEach(c => d += c.Price);
+            TotalLabel.Content = "$" + d;
         }
     }
 }

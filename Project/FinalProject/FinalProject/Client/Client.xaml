@@ -61,7 +61,7 @@
                     <Button x:Name="ClearSelectedButton" Content="Clear Selected" HorizontalAlignment="Left" Margin="10,530,0,0" VerticalAlignment="Top" Width="90" Click="ClearSelectedButton_Click"/>
                     <Button x:Name="ClearAllButton" Content="Clear All" HorizontalAlignment="Left" Margin="105,530,0,0" VerticalAlignment="Top" Width="90" Click="ClearAllButton_Click"/>
                     <Image x:Name="CartPreview" HorizontalAlignment="Left" Height="376" Margin="928,10,0,0" VerticalAlignment="Top" Width="251"/>
-                    <Button x:Name="CheckOutButton" Content="Check Out" HorizontalAlignment="Left" Margin="105,568,0,0" VerticalAlignment="Top" Width="90"/>
+                    <Button x:Name="CheckOutButton" Content="Check Out" HorizontalAlignment="Left" Margin="105,568,0,0" VerticalAlignment="Top" Width="90" Click="CheckOutButton_Click"/>
                     <Label x:Name="label" Content="Total:" HorizontalAlignment="Left" Margin="10,565,0,0" VerticalAlignment="Top"/>
                     <Label x:Name="TotalLabel" Content="$0.00" HorizontalAlignment="Left" Margin="62,565,0,0" VerticalAlignment="Top"/>
                     <TextBlock x:Name="CartDescriptionText" HorizontalAlignment="Left" Margin="856,391,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="200" Width="400"/>
@@ -86,7 +86,7 @@
                 </Grid>
             </TabItem>
         </TabControl>
-        <Label x:Name="LoggedInLabel" Content="" HorizontalAlignment="Left" Margin="445,7,0,0" VerticalAlignment="Top" Width="58"/>
+        <Label x:Name="LoggedInLabel" Content="" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="1034,10,0,0" VerticalAlignment="Top" Width="141" Height="40"/>
         <Button x:Name="LoginButton" Content="Login" HorizontalAlignment="Left" Margin="1180,10,0,0" VerticalAlignment="Top" Width="82" Height="40" Click="LoginButton_Click"/>
 
     </Grid>
