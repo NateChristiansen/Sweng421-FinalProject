@@ -192,12 +192,7 @@ namespace FinalProject
 
             var passWord = lrw.RegPassBox.Text;
 
-<<<<<<< HEAD
            var check = _users.FirstOrDefault(u => u.Username.Equals(userName));
-=======
-            if (first.Equals("") || last.Equals("") || userName.Equals("") || passWord.Equals("")) return;
-            _user = new Member(first, last, userName, passWord, (decimal)50.00);
->>>>>>> d48305cc9966cebb2376615a230182804ecbc2c6
 
             if (check == null)
             {
