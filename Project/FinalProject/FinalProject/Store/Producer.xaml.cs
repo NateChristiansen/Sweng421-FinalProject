@@ -147,7 +147,7 @@ namespace FinalProject
             if (ReleasedGrid.SelectedIndex == -1) return;
             // grab the user's input
             var updateString = Interaction.InputBox("Please enter a number to update the selected book's quantity", 
-                ((IBook)ReleasedGrid.SelectedItem).Title, "", -1, -1);
+                ((IBook)ReleasedGrid.SelectedItem).Title);
             try
             {
                 // try using the user's input as the update number

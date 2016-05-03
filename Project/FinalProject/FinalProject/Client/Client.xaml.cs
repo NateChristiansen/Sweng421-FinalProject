@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms;
@@ -23,14 +25,32 @@ namespace FinalProject
         private readonly List<IBook> _cart = new List<IBook>();
         private Member _user;
         private ISearchFilter _filter = new TitleFilter(null);
+        private List<Member> _users; 
 
         public Client(Store s)
         {
             InitializeComponent();
             _store = s;
+            LoadUsers();
             InitUi();
             PopulateStore();
             Show();
+        }
+
+        private void LoadUsers()
+        {
+            try
+            {
+                using (var stream = File.Open("RegisteredUsers.bin", FileMode.Open))
+                {
+                    var bformatter = new BinaryFormatter();
+                    _users = (List<Member>) bformatter.Deserialize(stream);
+                }
+            }
+            catch (FileNotFoundException)
+            {
+                _users = new List<Member>();
+            }
         }
 
         private void InitUi()
@@ -86,6 +106,9 @@ namespace FinalProject
                     break;
                 case "Browse":
                     PopulateStore();
+                    break;
+                case "Notifications":
+                    NotificationList.ItemsSource = _user.Notifications;
                     break;
             }
         }
@@ -160,56 +183,27 @@ namespace FinalProject
             // perform registration
             if (dr == System.Windows.Forms.DialogResult.Yes)
             {
-                var first = Interaction.InputBox("Please enter your first name:",
-                    "First", "", -1, -1);
-
-                var last = Interaction.InputBox("Please enter your last name:",
-                    "Last", "", -1, -1);
-
-                var userName = Interaction.InputBox("Please enter your username:",
-                    "Username", "", -1, -1);
-
-                var passWord = Interaction.InputBox("Please enter your password:",
-                    "Username", "", -1, -1);
-
+                var first = Interaction.InputBox("Please enter your first name:", "First");
+                var last = Interaction.InputBox("Please enter your last name:", "Last");
+                var userName = Interaction.InputBox("Please enter your username:", "Username");
+                var passWord = Interaction.InputBox("Please enter your password:", "Password");
 
                 if (first.Equals("") || last.Equals("") || userName.Equals("") || passWord.Equals("")) return;
                 _user = new Member(first, last, userName, passWord, (decimal)50.00);
-                _user.CreateUserFile();
+                _users.Add(_user);
+                //_user.CreateUserFile();
 
                 LoggedInLabel.Content = "Logged in as: " + _user.GetUsername();
-
                 LoginButton.Content = "Logout";
             }
             else
             {
-                var userName = Interaction.InputBox("Please enter your username:",
-                    "Username", "", -1, -1);
+                var userName = Interaction.InputBox("Please enter your username:", "Username");
+                var passWord = Interaction.InputBox("Please enter your password:", "Username");
 
-                var passWord = Interaction.InputBox("Please enter your password:",
-                    "Username", "", -1, -1);
+                _user = _users.FirstOrDefault(u => u.Username.Equals(userName) && u.Password.Equals(passWord));
 
-                var directoryPath = Path.GetDirectoryName(Path.GetDirectoryName(System.IO.Directory.GetCurrentDirectory()));
-                directoryPath = Path.Combine(directoryPath, "RegisteredUsers");
-
-                var userFound = false;
-
-                foreach (var file in Directory.EnumerateFiles(directoryPath, "*.txt"))
-                {
-                    var fileLines = File.ReadAllLines(file);
-
-                    if (!fileLines[0].Equals(userName) || !fileLines[1].Equals(passWord)) continue;
-                    var wallet = decimal.Parse(fileLines[2]);
-                    _user = new Member(userName, passWord, wallet);
-
-                    LoggedInLabel.Content = "Logged in as: " + _user.GetUsername();
-
-                    userFound = true;
-
-                    LoginButton.Content = "Logout";
-                }
-
-                if (!userFound)
+                if (_user == null)
                 {
                     MessageBox.Show("User does not exist. Please check your credentials.");
                 }
@@ -291,6 +285,14 @@ namespace FinalProject
                 Login();
                 return;
             }
+            decimal d = 0;
+            _cart.ForEach(c => d += c.Price);
+            if (d > _user.Wallet)
+            {
+                Interaction.MsgBox("You do not have enough funds to purchase these books.", MsgBoxStyle.OkOnly,
+                    "Not Enough Funds");
+                return;
+            }
             _cart.ForEach(b =>
             {
                 if (!CheckStore(b))
@@ -308,6 +310,16 @@ namespace FinalProject
             decimal d = 0;
             _cart.ForEach(c => d += c.Price);
             TotalLabel.Content = "$" + d;
+        }
+
+        private void SaveUsers(object sender, CancelEventArgs e)
+        {
+            using (Stream stream = File.Open("RegisteredUsers.bin", FileMode.OpenOrCreate))
+            {
+                var bformatter = new BinaryFormatter();
+
+                bformatter.Serialize(stream, _users);
+            }
         }
     }
 }
