@@ -6,13 +6,9 @@ using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Forms;
+using System.Windows.Data;
 using System.Windows.Input;
 using Microsoft.VisualBasic;
-using Binding = System.Windows.Data.Binding;
-using Label = System.Windows.Controls.Label;
-using MessageBox = System.Windows.MessageBox;
-using RadioButton = System.Windows.Controls.RadioButton;
 
 namespace FinalProject
 {
@@ -206,7 +202,7 @@ namespace FinalProject
             var user = lrw.UserNameBox.Text;
             var pass = lrw.PasswordBox.Text;
 
-            var directoryPath = Path.GetDirectoryName(Path.GetDirectoryName(System.IO.Directory.GetCurrentDirectory()));
+            var directoryPath = Path.GetDirectoryName(Path.GetDirectoryName(Directory.GetCurrentDirectory()));
             directoryPath = Path.Combine(directoryPath, "RegisteredUsers");
 
             var userFound = false;
@@ -337,6 +333,7 @@ namespace FinalProject
 
         private void SaveUsers(object sender, CancelEventArgs e)
         {
+            e.Cancel = false;
             using (Stream stream = File.Open("RegisteredUsers.bin", FileMode.OpenOrCreate))
             {
                 var bformatter = new BinaryFormatter();
@@ -371,6 +368,11 @@ namespace FinalProject
         {
             var notification = ((Member.Notification) NotificationGrid.SelectedItem);
             _cart.Add(notification.Book);
+        }
+
+        private void Client_OnClosed(object sender, EventArgs e)
+        {
+            Application.Current.Shutdown();
         }
     }
 }

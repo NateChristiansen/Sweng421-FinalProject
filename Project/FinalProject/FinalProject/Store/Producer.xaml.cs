@@ -79,7 +79,7 @@ namespace FinalProject
 
         private void InitBooks()
         {
-            var directoryPath = Path.GetDirectoryName(Path.GetDirectoryName(System.IO.Directory.GetCurrentDirectory()));
+            var directoryPath = Path.GetDirectoryName(Path.GetDirectoryName(Directory.GetCurrentDirectory()));
             directoryPath = Path.Combine(directoryPath, "bookCovers");
             // UNRELEASED BOOKS
 

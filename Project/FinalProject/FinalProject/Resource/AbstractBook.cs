@@ -1,8 +1,5 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Threading;
 using System.Windows.Media.Imaging;
-using System.Xml.Serialization;
 
 namespace FinalProject
 {
