@@ -1,6 +1,4 @@
-﻿using System.Net.Mime;
-using System.Windows.Controls;
-using System.Windows.Media.Imaging;
+﻿using System.Windows.Media.Imaging;
 
 namespace FinalProject
 {

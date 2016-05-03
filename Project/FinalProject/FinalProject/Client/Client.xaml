@@ -13,12 +13,18 @@
                     <Label Content="Browse" MouseLeftButtonDown="TabItemMouseDown"></Label>
                 </TabItem.Header>
                 <Grid Background="#FFE5E5E5">
-                    <DataGrid x:Name="BrowseGrid" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="233" Width="399" SelectionChanged="BrowseSelected" SelectionMode="Single" SelectionUnit="FullRow">
+                    <DataGrid x:Name="BrowseGrid" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="556" Width="841" SelectionChanged="BrowseSelected" SelectionMode="Single" SelectionUnit="FullRow">
+                        <DataGrid.Resources>
+                            <Style TargetType="DataGridCell">
+                                <Setter Property="BorderThickness" Value="0"/>
+                                <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+                            </Style>
+                        </DataGrid.Resources>
                     </DataGrid>
-                    <Image x:Name="BrowseImage" HorizontalAlignment="Left" Height="160" Margin="437,10,0,0" VerticalAlignment="Top" Width="107"/>
-                    <Button x:Name="AddToCartButton" Content="Add Selected To Cart" HorizontalAlignment="Left" Margin="283,248,0,0" VerticalAlignment="Top" Width="126" Click="AddToCartButton_Click"/>
-                    <TextBlock x:Name="BrowseDescriptionText" HorizontalAlignment="Left" Margin="414,175,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="93" Width="143"/>
-                    <Button x:Name="RefreshButton" Content="Refresh" HorizontalAlignment="Left" Margin="10,248,0,0" VerticalAlignment="Top" Width="75" Click="RefreshButton_Click"/>
+                    <Image x:Name="BrowseImage" HorizontalAlignment="Left" Height="376" Margin="936,10,0,0" VerticalAlignment="Top" Width="251"/>
+                    <Button x:Name="AddToCartButton" Content="Add Selected To Cart" HorizontalAlignment="Left" Margin="725,571,0,0" VerticalAlignment="Top" Width="126" Click="AddToCartButton_Click"/>
+                    <TextBlock x:Name="BrowseDescriptionText" HorizontalAlignment="Left" Margin="856,391,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="200" Width="400"/>
+                    <Button x:Name="RefreshButton" Content="Refresh" HorizontalAlignment="Left" Margin="10,571,0,0" VerticalAlignment="Top" Width="75" Click="RefreshButton_Click"/>
                 </Grid>
             </TabItem>
             <TabItem>
@@ -26,18 +32,25 @@
                     <Label Content="Search" MouseLeftButtonDown="TabItemMouseDown"></Label>
                 </TabItem.Header>
                 <Grid Background="#FFE5E5E5">
-                    <TextBox x:Name="SearchBox" HorizontalAlignment="Left" Height="23" Margin="10,10,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="242"/>
-                    <Button x:Name="SearchButton" Content="Search" HorizontalAlignment="Left" Margin="257,9,0,0" VerticalAlignment="Top" Width="75" Height="24" Click="SearchButton_Click"/>
+                    <TextBox x:Name="SearchBox" HorizontalAlignment="Left" Height="23" Margin="10,10,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="304"/>
+                    <Button x:Name="SearchButton" Content="Search" HorizontalAlignment="Left" Margin="319,10,0,0" VerticalAlignment="Top" Width="75" Height="24" Click="SearchButton_Click"/>
                     <Canvas HorizontalAlignment="Left" Height="18" Margin="10,38,0,0" VerticalAlignment="Top" Width="236">
-                        <RadioButton x:Name="TitleButton" Content="Title" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                        <RadioButton x:Name="AuthorButton" Content="Author" Canvas.Left="46"/>
-                        <RadioButton x:Name="GenreButton" Content="Genre" Canvas.Left="107"/>
-                        <RadioButton x:Name="PublisherButton" Content="Publisher" Canvas.Left="163"/>
+                        <RadioButton x:Name="TitleButton" Content="Title" HorizontalAlignment="Left" VerticalAlignment="Top" IsChecked="True" Checked="FilterButtonChecked"/>
+                        <RadioButton x:Name="AuthorButton" Content="Author" Canvas.Left="46" Checked="FilterButtonChecked"/>
+                        <RadioButton x:Name="GenreButton" Content="Genre" Canvas.Left="107" Checked="FilterButtonChecked"/>
+                        <RadioButton x:Name="PublisherButton" Content="Publisher" Canvas.Left="163" Checked="FilterButtonChecked"/>
                     </Canvas>
-                    <ListBox x:Name="SearchResultList" HorizontalAlignment="Left" Height="207" Margin="10,61,0,0" VerticalAlignment="Top" Width="322" SelectionMode="Single"/>
-                    <Image x:Name="SearchResultImage" HorizontalAlignment="Left" Height="160" Margin="399,10,0,0" VerticalAlignment="Top" Width="107"/>
-                    <Button x:Name="GoToStoreButton" Content="Go To Store" HorizontalAlignment="Left" Margin="257,36,0,0" VerticalAlignment="Top" Width="75" Click="GoToStoreButton_Click"/>
-                    <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="337,175,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="93" Width="220"/>
+                    <Image x:Name="SearchResultImage" HorizontalAlignment="Left" Height="376" Margin="941,10,0,0" VerticalAlignment="Top" Width="251"/>
+                    <Button x:Name="GoToStoreButton" Content="Add Selected to Cart" HorizontalAlignment="Left" Margin="257,36,0,0" VerticalAlignment="Top" Width="137" Click="AddSearchToCart_Click"/>
+                    <TextBlock x:Name="SearchDescriptionText" HorizontalAlignment="Left" Margin="856,391,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="200" Width="400"/>
+                    <DataGrid x:Name="SearchGrid" HorizontalAlignment="Left" Margin="10,61,0,0" VerticalAlignment="Top" Height="530" Width="841" SelectionChanged="SearchSelected" SelectionMode="Single" SelectionUnit="FullRow">
+                        <DataGrid.Resources>
+                            <Style TargetType="DataGridCell">
+                                <Setter Property="BorderThickness" Value="0"/>
+                                <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+                            </Style>
+                        </DataGrid.Resources>
+                    </DataGrid>
                 </Grid>
             </TabItem>
             <TabItem>
@@ -45,14 +58,21 @@
                     <Label Content="Cart" MouseLeftButtonDown="TabItemMouseDown"></Label>
                 </TabItem.Header>
                 <Grid Background="#FFE5E5E5">
-                    <ListBox x:Name="CartList" HorizontalAlignment="Left" Height="184" Margin="10,10,0,0" VerticalAlignment="Top" Width="322"/>
-                    <Button x:Name="ClearSelectedButton" Content="Clear Selected" HorizontalAlignment="Left" Margin="10,207,0,0" VerticalAlignment="Top" Width="90"/>
-                    <Button x:Name="ClearAllButton" Content="Clear All" HorizontalAlignment="Left" Margin="242,207,0,0" VerticalAlignment="Top" Width="90"/>
-                    <Image x:Name="CartPreview" HorizontalAlignment="Left" Height="160" Margin="394,10,0,0" VerticalAlignment="Top" Width="107"/>
-                    <Button x:Name="CheckOutButton" Content="Check Out" HorizontalAlignment="Left" Margin="242,248,0,0" VerticalAlignment="Top" Width="90"/>
-                    <Label x:Name="label" Content="Total:" HorizontalAlignment="Left" Margin="10,245,0,0" VerticalAlignment="Top"/>
-                    <Label x:Name="TotalLabel" Content="$0.00" HorizontalAlignment="Left" Margin="53,245,0,0" VerticalAlignment="Top"/>
-                    <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="337,175,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="93" Width="220"/>
+                    <Button x:Name="ClearSelectedButton" Content="Clear Selected" HorizontalAlignment="Left" Margin="10,530,0,0" VerticalAlignment="Top" Width="90" Click="ClearSelectedButton_Click"/>
+                    <Button x:Name="ClearAllButton" Content="Clear All" HorizontalAlignment="Left" Margin="105,530,0,0" VerticalAlignment="Top" Width="90" Click="ClearAllButton_Click"/>
+                    <Image x:Name="CartPreview" HorizontalAlignment="Left" Height="376" Margin="928,10,0,0" VerticalAlignment="Top" Width="251"/>
+                    <Button x:Name="CheckOutButton" Content="Check Out" HorizontalAlignment="Left" Margin="105,568,0,0" VerticalAlignment="Top" Width="90"/>
+                    <Label x:Name="label" Content="Total:" HorizontalAlignment="Left" Margin="10,565,0,0" VerticalAlignment="Top"/>
+                    <Label x:Name="TotalLabel" Content="$0.00" HorizontalAlignment="Left" Margin="62,565,0,0" VerticalAlignment="Top"/>
+                    <TextBlock x:Name="CartDescriptionText" HorizontalAlignment="Left" Margin="856,391,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="200" Width="400"/>
+                    <DataGrid x:Name="CartGrid" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="515" Width="841" SelectionChanged="CartSelected" SelectionMode="Single" SelectionUnit="FullRow">
+                        <DataGrid.Resources>
+                            <Style TargetType="DataGridCell">
+                                <Setter Property="BorderThickness" Value="0"/>
+                                <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+                            </Style>
+                        </DataGrid.Resources>
+                    </DataGrid>
                 </Grid>
             </TabItem>
             <TabItem>
@@ -60,14 +80,14 @@
                     <Label Content="Notifications" MouseLeftButtonDown="TabItemMouseDown"></Label>
                 </TabItem.Header>
                 <Grid Background="#FFE5E5E5">
-                    <Button x:Name="ClearSelectedNotificationButton" Content="Clear Selected" HorizontalAlignment="Left" Margin="467,10,0,0" VerticalAlignment="Top" Width="90"/>
-                    <ListBox x:Name="NotificationList" HorizontalAlignment="Left" Height="258" Margin="10,10,0,0" VerticalAlignment="Top" Width="452"/>
-                    <Button x:Name="ClearAllNotificationButton" Content="Clear All" HorizontalAlignment="Left" Margin="467,35,0,0" VerticalAlignment="Top" Width="90"/>
+                    <Button x:Name="ClearSelectedNotificationButton" Content="Clear Selected" HorizontalAlignment="Left" Margin="1071,571,0,0" VerticalAlignment="Top" Width="90"/>
+                    <ListBox x:Name="NotificationList" HorizontalAlignment="Left" Height="556" Margin="10,10,0,0" VerticalAlignment="Top" Width="1246"/>
+                    <Button x:Name="ClearAllNotificationButton" Content="Clear All" HorizontalAlignment="Left" Margin="1166,571,0,0" VerticalAlignment="Top" Width="90"/>
                 </Grid>
             </TabItem>
         </TabControl>
         <Label x:Name="LoggedInLabel" Content="" HorizontalAlignment="Left" Margin="445,7,0,0" VerticalAlignment="Top" Width="58"/>
-        <Button x:Name="LoginButton" Content="Login" HorizontalAlignment="Left" Margin="1180,10,0,0" VerticalAlignment="Top" Width="82" MouseDown="LoginButton_Clicked" Height="40"/>
+        <Button x:Name="LoginButton" Content="Login" HorizontalAlignment="Left" Margin="1180,10,0,0" VerticalAlignment="Top" Width="82" Height="40" Click="LoginButton_Click"/>
 
     </Grid>
 </Window>

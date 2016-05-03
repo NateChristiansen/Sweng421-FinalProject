@@ -11,6 +11,11 @@
         {
             _book = book;
         }
+        public Stock(IBook book, int initialquanitity)
+        {
+            _book = book;
+            _stock = initialquanitity;
+        }
 
         public void SetStore(Store s)
         {

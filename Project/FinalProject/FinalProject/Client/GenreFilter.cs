@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace FinalProject
 {
@@ -10,9 +12,10 @@ namespace FinalProject
         {
             _filter = filter;
         }
-        public void Apply(string filterText)
+
+        public List<IBook> Apply(string filterText, List<IBook> list)
         {
-            throw new NotImplementedException();
+            return list.Where(b => b.Genre.ToLower().Contains(filterText.ToLower())).ToList();
         }
     }
 }

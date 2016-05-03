@@ -1,7 +1,9 @@
-﻿namespace FinalProject
+﻿using System.Collections.Generic;
+
+namespace FinalProject
 {
     public interface ISearchFilter
     {
-        void Apply(string filterText);
+        List<IBook> Apply(string filterText, List<IBook> list);
     }
 }

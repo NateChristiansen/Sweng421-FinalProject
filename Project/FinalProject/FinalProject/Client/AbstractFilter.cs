@@ -1,12 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace FinalProject
 {
     public abstract class AbstractFilter : ISearchFilter
     {
-        public void Apply(string filterText)
-        {
-            throw new NotImplementedException();
-        }
+        public abstract List<IBook> Apply(string filterText, List<IBook> list);
     }
 }
