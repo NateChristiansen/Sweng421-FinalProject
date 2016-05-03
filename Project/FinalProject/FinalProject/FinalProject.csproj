@@ -92,7 +92,7 @@
     <Compile Include="Client\Member.cs" />
     <Compile Include="Client\TitleFilter.cs" />
     <Compile Include="Client\PublisherFilter.cs" />
-    <Compile Include="LogRegWin.xaml.cs">
+    <Compile Include="Client\LogRegWin.xaml.cs">
       <DependentUpon>LogRegWin.xaml</DependentUpon>
     </Compile>
     <Compile Include="Resource\AbstractBook.cs" />
@@ -108,7 +108,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="LogRegWin.xaml">
+    <Page Include="Client\LogRegWin.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

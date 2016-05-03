@@ -211,6 +211,8 @@ namespace FinalProject
             {
                 if(_store.InStock(s))
                     _user.Notify(s);
+                else
+                    _store.Subscribe(_user, s);
             });
             LoggedInLabel.Content = _user.Username + " - $" + _user.Wallet;
             LoginButton.Content = "Logout";
