@@ -117,6 +117,7 @@ namespace FinalProject
         {
             var username = Interaction.InputBox("Enter your username", "Username");
             var password = Interaction.InputBox("Enter your password", "Password");
+            var something = _users.Users.ToList();
             var us = _users.Users.ToList().FirstOrDefault(u => u.Username == username && u.Password == password);
             if (us == null)
             {
