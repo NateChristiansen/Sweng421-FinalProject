@@ -33,36 +33,6 @@ namespace FinalProject
             Wallet = wallet;
         }
 
-        public decimal GetWallet()
-        {
-            return Wallet;
-        }
-
-        public string GetUsername()
-        {
-            return Username;
-        }
-
-        public string GetFirstName()
-        {
-            return FirstName;
-        }
-
-        public string GetLastName()
-        {
-            return LastName;
-        }
-
-        public string GetEmail()
-        {
-            return Email;
-        }
-
-        public List<string> GetSubs()
-        {
-            return SubscriberList;
-        }
-
         public void Notify(IBook book)
         {
             Notifications.Add(new Notification

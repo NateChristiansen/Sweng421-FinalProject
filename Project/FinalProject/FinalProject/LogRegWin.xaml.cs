@@ -8,7 +8,7 @@ namespace FinalProject
     /// </summary>
     public partial class LogRegWin : Window
     {
-        private Client _client;
+        private readonly Client _client;
         public LogRegWin(Client client)
         {
             InitializeComponent();

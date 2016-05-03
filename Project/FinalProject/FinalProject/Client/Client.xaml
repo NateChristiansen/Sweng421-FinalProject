@@ -94,7 +94,7 @@
                 </Grid>
             </TabItem>
         </TabControl>
-        <Label x:Name="LoggedInLabel" Content="" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="1034,10,0,0" VerticalAlignment="Top" Width="141" Height="40" MouseDown="UserClick"/>
+        <Label x:Name="LoggedInLabel" Content="" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="1034,10,0,0" VerticalAlignment="Top" Width="141" Height="40"/>
         <Button x:Name="LoginButton" Content="Login" HorizontalAlignment="Left" Margin="1180,10,0,0" VerticalAlignment="Top" Width="82" Height="40" Click="LoginButton_Click"/>
 
     </Grid>
