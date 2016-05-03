@@ -170,7 +170,10 @@ namespace FinalProject
                 MessageBox.Show("This item is not currently in stock, would you like to subscribe to be notified when it becomes available?", "Out of Stock", MessageBoxButton.YesNo);
             if (result == MessageBoxResult.No) return false;
             if (_user != null)
+            {
                 _store.Subscribe(_user, book);
+                _user.SubscriberList.Add(book);
+            }
             else
                 MessageBox.Show("Please log in before subscribing.", "Not Logged In", MessageBoxButton.OK);
             return false;
@@ -202,10 +205,13 @@ namespace FinalProject
         {
             var user = lrw.UserNameBox.Text;
             var pass = lrw.PasswordBox.Text;
-            var check = _users.FirstOrDefault(u => u.Username.Equals(user) && u.Password.Equals(pass));
-            if (check == null) return;
-
-            _user = check;
+            _user = _users.FirstOrDefault(u => u.Username.Equals(user) && u.Password.Equals(pass));
+            if (_user == null) return;
+            _user.SubscriberList.ForEach(s =>
+            {
+                if(_store.InStock(s))
+                    _user.Notify(s);
+            });
             LoggedInLabel.Content = _user.Username + " - $" + _user.Wallet;
             LoginButton.Content = "Logout";
         }
