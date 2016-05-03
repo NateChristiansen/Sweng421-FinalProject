@@ -30,6 +30,10 @@ namespace FinalProject
         private void AddToStoreButton_Click(object sender, RoutedEventArgs e)
         {
             var book = (IBook)UnreleasedGrid.SelectedItem; // get the selected book
+
+            if (book == null)
+                return;
+
             var s = new Stock(book); // make new stock
             _stocks.Add(s); // add to stock list
             _unreleasedBooks.Remove(book); // remove book from the unreleased books list
@@ -171,7 +175,11 @@ namespace FinalProject
 
         public void AddBookToStore(IBook book)
         {
-            _store.AddBook(_stocks.First(s => s.GetBook().Title.Equals(book.Title)));
+            var check = _stocks.FirstOrDefault(s => s.GetBook().Title.Equals(book.Title));
+            if (check == null)
+                return;
+
+            _store.AddBook(check);
         }
 
         private void UpdateQuantityButton_Click(object sender, RoutedEventArgs e)

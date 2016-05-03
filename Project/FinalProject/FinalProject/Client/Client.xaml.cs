@@ -118,7 +118,6 @@ namespace FinalProject
         private void SearchButton_Click(object sender, RoutedEventArgs e)
         {
             var query = SearchBox.Text;
-            SearchGrid.Items.Clear();
             SearchGrid.ClearValue(ItemsControl.ItemsSourceProperty);
             SearchGrid.ItemsSource = _filter.Apply(SearchBox.Text, _store.Search(query));
         }
