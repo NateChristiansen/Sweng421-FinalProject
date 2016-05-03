@@ -69,8 +69,14 @@ namespace FinalProject
         {
             Notifications.Add(new Notification
             {
+<<<<<<< HEAD
                 Text = string.Format("{0} by {1} is now in stock!", book.Title, book.Author),
                 Time = DateTime.Now
+=======
+                Text = $"{book.Title} by {book.Author} is now in stock!",
+                Time = DateTime.Now,
+                Book = book
+>>>>>>> d48305cc9966cebb2376615a230182804ecbc2c6
             });
         }
 
@@ -79,6 +85,7 @@ namespace FinalProject
         {
             public string Text { get; set; } 
             public DateTime Time { get; set; }
+            public IBook Book { get; set; }
         }
     }
 }

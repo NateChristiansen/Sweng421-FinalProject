@@ -192,7 +192,12 @@ namespace FinalProject
 
             var passWord = lrw.RegPassBox.Text;
 
+<<<<<<< HEAD
            var check = _users.FirstOrDefault(u => u.Username.Equals(userName));
+=======
+            if (first.Equals("") || last.Equals("") || userName.Equals("") || passWord.Equals("")) return;
+            _user = new Member(first, last, userName, passWord, (decimal)50.00);
+>>>>>>> d48305cc9966cebb2376615a230182804ecbc2c6
 
             if (check == null)
             {
@@ -353,6 +358,28 @@ namespace FinalProject
         {
             if (_user == null) return;
             Interaction.MsgBox(_user.OwnedBooks.Select(b => b.Title).ToString());
+        }
+
+        private void ClearAllNotificationButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (_user == null) return;
+            _user.Notifications.Clear();
+            NotificationGrid.ClearValue(ItemsControl.ItemsSourceProperty);
+            NotificationGrid.ItemsSource = _user.Notifications;
+        }
+
+        private void ClearSelectedNotificationButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (_user == null) return;
+            _user.Notifications.Remove((Member.Notification) NotificationGrid.SelectedItem);
+            NotificationGrid.ClearValue(ItemsControl.ItemsSourceProperty);
+            NotificationGrid.ItemsSource = _user.Notifications;
+        }
+
+        private void AddNotificationToCart_Click(object sender, RoutedEventArgs e)
+        {
+            var notification = ((Member.Notification) NotificationGrid.SelectedItem);
+            _cart.Add(notification.Book);
         }
     }
 }
