@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -78,9 +79,18 @@ namespace FinalProject
 
         private void InitBooks()
         {
+            var directoryPath = Path.GetDirectoryName(Path.GetDirectoryName(System.IO.Directory.GetCurrentDirectory()));
+            directoryPath = Path.Combine(directoryPath, "bookCovers");
             // UNRELEASED BOOKS
+
+            var harry = Path.Combine(directoryPath, "harryPotter.jpg");
+            var hbm = new BitmapImage();
+            hbm.BeginInit();
+            hbm.UriSource = new Uri(harry);
+            hbm.EndInit();
+
             _unreleasedBooks.Add(new Book(
-                new BitmapImage(),
+                hbm,
                 "Harry Potter",
                 "Wizard boy wonder.",
                 "J.K. Rowling",
@@ -90,9 +100,15 @@ namespace FinalProject
                 new decimal(10))
                 );
 
+            var hg = Path.Combine(directoryPath, "hungerGames.jpg");
+            var hungerGames = new BitmapImage();
+            hungerGames.BeginInit();
+            hungerGames.UriSource = new Uri(hg);
+            hungerGames.EndInit();
+
             _unreleasedBooks.Add(
                 new Book(
-                    new BitmapImage(),
+                    hungerGames,
                     "The Hunger Games",
                     "Kids battle to the death.",
                     "Suzanne Collins",
@@ -102,8 +118,14 @@ namespace FinalProject
                     new decimal(8))
                 );
 
+            var pt = Path.Combine(directoryPath, "paperTowns.jpg");
+            var paperTowns = new BitmapImage();
+            paperTowns.BeginInit();
+            paperTowns.UriSource = new Uri(pt);
+            paperTowns.EndInit();
+
             _unreleasedBooks.Add(new Book(
-                new BitmapImage(),
+                paperTowns,
                 "Paper Towns",
                 "Sappy story",
                 "John Green",
@@ -114,16 +136,30 @@ namespace FinalProject
                 );
 
             // RELEASED BOOKS
+
+            var tm = Path.Combine(directoryPath, "theMartian.jpg");
+            var theMartian = new BitmapImage();
+            theMartian.BeginInit();
+            theMartian.UriSource = new Uri(tm);
+            theMartian.EndInit();
+
             var s1 =
                 new Stock(
-                    new Book(new BitmapImage(), "The Martian",
+                    new Book(theMartian, "The Martian",
                         "Man goes to space, grows potatoes, does well for himself", "Andy Weir", "Adventure",
                         "6543-98765", "Publishing Co.", new decimal(6.99)), 50);
             _stocks.Add(s1);
 
+
+            var tk = Path.Combine(directoryPath, "TKAM.jpg");
+            var TKAM = new BitmapImage();
+            TKAM.BeginInit();
+            TKAM.UriSource = new Uri(tk);
+            TKAM.EndInit();
+
             var s2 =
                 new Stock(
-                    new Book(new BitmapImage(), "To Kill a Mockingbird", "Good book", "Harper Lee", "Drama",
+                    new Book(TKAM, "To Kill a Mockingbird", "Good book", "Harper Lee", "Drama",
                         "5576-09876", "NiceGuy", new decimal(10.00)), 50);
             _stocks.Add(s2);
 
