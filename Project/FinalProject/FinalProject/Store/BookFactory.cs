@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 namespace FinalProject
@@ -9,9 +8,7 @@ namespace FinalProject
         private readonly Dictionary<IBook, Stock> _stocks = new Dictionary<IBook, Stock>(); 
         public IBook GetBook(IBook book)
         {
-            if (!CheckStock(book)) return null;
-            _stocks[book].RemoveBook();
-            return book;
+            return !CheckStock(book) ? null : _stocks[book].RemoveBook();
         }
 
         public List<IBook> GetBooks()

@@ -6,13 +6,9 @@ using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Forms;
+using System.Windows.Data;
 using System.Windows.Input;
 using Microsoft.VisualBasic;
-using Binding = System.Windows.Data.Binding;
-using Label = System.Windows.Controls.Label;
-using MessageBox = System.Windows.MessageBox;
-using RadioButton = System.Windows.Controls.RadioButton;
 
 namespace FinalProject
 {
@@ -171,64 +167,55 @@ namespace FinalProject
             if (_store.InStock(book))
                 return true;
             var result =
-                Interaction.MsgBox(
-                    "This item is not currently in stock, would you like to subscribe to be notified when it becomes available?",
-                    MsgBoxStyle.YesNo, "Out of Stock");
-            if (result == MsgBoxResult.No) return false;
+                MessageBox.Show("This item is not currently in stock, would you like to subscribe to be notified when it becomes available?", "Out of Stock", MessageBoxButton.YesNo);
+            if (result == MessageBoxResult.No) return false;
             if (_user != null)
+            {
                 _store.Subscribe(_user, book);
+                _user.SubscriberList.Add(book);
+            }
             else
-                Interaction.MsgBox("Please log in before subscribing.", MsgBoxStyle.OkOnly, "Not Logged In");
+                MessageBox.Show("Please log in before subscribing.", "Not Logged In", MessageBoxButton.OK);
             return false;
         }
 
         public void Register(LogRegWin lrw)
         {
             var first = lrw.RegNameBox.Text;
-
             var last = lrw.RegLastNameBox.Text;
-
             var userName = lrw.RegUserBox.Text;
-
             var passWord = lrw.RegPassBox.Text;
-
-           var check = _users.FirstOrDefault(u => u.Username.Equals(userName));
+            var check = _users.FirstOrDefault(u => u.Username.Equals(userName));
 
             if (check == null)
             {
                 if (first.Equals("") || last.Equals("") || userName.Equals("") || passWord.Equals("")) return;
                 _user = new Member(first, last, userName, passWord, (decimal) 50.00);
-
                 _users.Add(_user);
-
-                LoggedInLabel.Content = "Logged in as: " + _user.GetUsername();
-
+                LoggedInLabel.Content = _user.Username + " - $" + _user.Wallet;
                 LoginButton.Content = "Logout";
             }
             else
             {
                 MessageBox.Show("User already exists. Please enter your own credentials.");
             }
-
-            
         }
 
         public void Login(LogRegWin lrw)
         {
-
             var user = lrw.UserNameBox.Text;
             var pass = lrw.PasswordBox.Text;
-
-            var check = _users.FirstOrDefault(u => u.Username.Equals(user) && u.Password.Equals(pass));
-
-            if (check != null)
+            _user = _users.FirstOrDefault(u => u.Username.Equals(user) && u.Password.Equals(pass));
+            if (_user == null) return;
+            _user.SubscriberList.ForEach(s =>
             {
-                _user = check;
-
-                LoggedInLabel.Content = "Logged in as: " + _user.GetUsername();
-
-                LoginButton.Content = "Logout";
-            }
+                if(_store.InStock(s))
+                    _user.Notify(s);
+                else
+                    _store.Subscribe(_user, s);
+            });
+            LoggedInLabel.Content = _user.Username + " - $" + _user.Wallet;
+            LoginButton.Content = "Logout";
         }
 
         public void Logout()
@@ -317,7 +304,7 @@ namespace FinalProject
             _cart.ForEach(c => d += c.Price);
             if (d > _user.Wallet)
             {
-                Interaction.MsgBox("You do not have enough funds to purchase these books.", MsgBoxStyle.OkOnly, "Not Enough Funds");
+                MessageBox.Show("You do not have enough funds to purchase these books.", "Not Enough Funds", MessageBoxButton.OK);
                 return;
             }
             _cart.ForEach(b =>
@@ -326,6 +313,7 @@ namespace FinalProject
                     _cart.Remove(b);
             });
             _store.PurchaseBooks(_cart, _user);
+            LoggedInLabel.Content = _user.Username + " - $" + _user.Wallet;
             ClearCart();
         }
 
@@ -344,15 +332,8 @@ namespace FinalProject
             using (Stream stream = File.Open("RegisteredUsers.bin", FileMode.OpenOrCreate))
             {
                 var bformatter = new BinaryFormatter();
-
                 bformatter.Serialize(stream, _users);
             }
-        }
-
-        private void UserClick(object sender, MouseButtonEventArgs e)
-        {
-            if (_user == null) return;
-            Interaction.MsgBox(_user.OwnedBooks.Select(b => b.Title).ToString());
         }
 
         private void ClearAllNotificationButton_Click(object sender, RoutedEventArgs e)
@@ -375,6 +356,11 @@ namespace FinalProject
         {
             var notification = ((Member.Notification) NotificationGrid.SelectedItem);
             _cart.Add(notification.Book);
+        }
+
+        private void Client_OnClosed(object sender, EventArgs e)
+        {
+            Application.Current.Shutdown();
         }
     }
 }

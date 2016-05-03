@@ -1,8 +1,5 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Threading;
 using System.Windows.Media.Imaging;
-using System.Xml.Serialization;
 
 namespace FinalProject
 {
@@ -23,10 +20,5 @@ namespace FinalProject
         private BitmapImage _cover;
         public string Summary { get; protected set; }
         public string Isbn { get; protected set; }
-
-        public bool EqualsBook(IBook b)
-        {
-            return Title.Equals(b.Title);
-        }
     }
 }

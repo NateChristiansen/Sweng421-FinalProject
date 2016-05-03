@@ -79,7 +79,7 @@ namespace FinalProject
 
         private void InitBooks()
         {
-            var directoryPath = Path.GetDirectoryName(Path.GetDirectoryName(System.IO.Directory.GetCurrentDirectory()));
+            var directoryPath = Path.GetDirectoryName(Path.GetDirectoryName(Directory.GetCurrentDirectory()));
             directoryPath = Path.Combine(directoryPath, "bookCovers");
             // UNRELEASED BOOKS
 
@@ -171,7 +171,7 @@ namespace FinalProject
 
         public void AddBookToStore(IBook book)
         {
-            _store.AddBook(_stocks.First(s => s.GetBook().EqualsBook(book)));
+            _store.AddBook(_stocks.First(s => s.GetBook().Title.Equals(book.Title)));
         }
 
         private void UpdateQuantityButton_Click(object sender, RoutedEventArgs e)

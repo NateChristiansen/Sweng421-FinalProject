@@ -1,5 +1,4 @@
-﻿using System;
-using System.Windows.Media.Imaging;
+﻿using System.Windows.Media.Imaging;
 
 namespace FinalProject
 {
@@ -13,6 +12,5 @@ namespace FinalProject
         BitmapImage Cover { get; }
         string Summary { get; }
         string Isbn { get; }
-        bool EqualsBook(IBook b);
     }
 }
