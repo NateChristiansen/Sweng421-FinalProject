@@ -92,6 +92,9 @@
     <Compile Include="Client\Member.cs" />
     <Compile Include="Client\TitleFilter.cs" />
     <Compile Include="Client\PublisherFilter.cs" />
+    <Compile Include="LogRegWin.xaml.cs">
+      <DependentUpon>LogRegWin.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Resource\AbstractBook.cs" />
     <Compile Include="Resource\Book.cs" />
     <Compile Include="Resource\IBook.cs" />
@@ -102,6 +105,10 @@
     <Compile Include="Store\Store.cs" />
     <Compile Include="Store\SubscriptionObserver.cs" />
     <Page Include="Client\Client.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="LogRegWin.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

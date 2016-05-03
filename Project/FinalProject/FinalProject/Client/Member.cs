@@ -14,7 +14,7 @@ namespace FinalProject
         public string Email { get; set; }
         public string Password { get; set; }
         public List<string> SubscriberList = new List<string>();
-        public List<IBook> OwnedBooks = new List<IBook>(); 
+        public List<IBook> OwnedBooks = new List<IBook>();
 
         public Member(string first, string last, string user, string pass, decimal wallet)
         {

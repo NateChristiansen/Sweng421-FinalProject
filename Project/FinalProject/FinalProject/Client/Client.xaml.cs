@@ -152,67 +152,54 @@ namespace FinalProject
             return false;
         }
 
-        public void Login()
+        public void Register(LogRegWin lrw)
         {
-            var dr = (DialogResult) MessageBox.Show("Click yes to register, no to login", "Register or Login",
-                MessageBoxButton.YesNo);
+            var first = lrw.RegNameBox.Text;
 
-            // perform registration
-            if (dr == System.Windows.Forms.DialogResult.Yes)
+            var last = lrw.RegLastNameBox.Text;
+
+            var userName = lrw.RegUserBox.Text;
+
+            var passWord = lrw.RegPassBox.Text;
+
+            if (first.Equals("") || last.Equals("") || userName.Equals("") || passWord.Equals("")) return;
+            _user = new Member(first, last, userName, passWord, (decimal)50.00);
+            _user.CreateUserFile();
+
+            LoggedInLabel.Content = "Logged in as: " + _user.GetUsername();
+
+            LoginButton.Content = "Logout";
+        }
+
+        public void Login(LogRegWin lrw)
+        {
+
+            var user = lrw.UserNameBox.Text;
+            var pass = lrw.PasswordBox.Text;
+
+            var directoryPath = Path.GetDirectoryName(Path.GetDirectoryName(System.IO.Directory.GetCurrentDirectory()));
+            directoryPath = Path.Combine(directoryPath, "RegisteredUsers");
+
+            var userFound = false;
+
+            foreach (var file in Directory.EnumerateFiles(directoryPath, "*.txt"))
             {
-                var first = Interaction.InputBox("Please enter your first name:",
-                    "First", "", -1, -1);
+                var fileLines = File.ReadAllLines(file);
 
-                var last = Interaction.InputBox("Please enter your last name:",
-                    "Last", "", -1, -1);
-
-                var userName = Interaction.InputBox("Please enter your username:",
-                    "Username", "", -1, -1);
-
-                var passWord = Interaction.InputBox("Please enter your password:",
-                    "Username", "", -1, -1);
-
-
-                if (first.Equals("") || last.Equals("") || userName.Equals("") || passWord.Equals("")) return;
-                _user = new Member(first, last, userName, passWord, (decimal)50.00);
-                _user.CreateUserFile();
+                if (!fileLines[0].Equals(user) || !fileLines[1].Equals(pass)) continue;
+                var wallet = decimal.Parse(fileLines[2]);
+                _user = new Member(user, pass, wallet);
 
                 LoggedInLabel.Content = "Logged in as: " + _user.GetUsername();
 
+                userFound = true;
+
                 LoginButton.Content = "Logout";
             }
-            else
+
+            if (!userFound)
             {
-                var userName = Interaction.InputBox("Please enter your username:",
-                    "Username", "", -1, -1);
-
-                var passWord = Interaction.InputBox("Please enter your password:",
-                    "Username", "", -1, -1);
-
-                var directoryPath = Path.GetDirectoryName(Path.GetDirectoryName(System.IO.Directory.GetCurrentDirectory()));
-                directoryPath = Path.Combine(directoryPath, "RegisteredUsers");
-
-                var userFound = false;
-
-                foreach (var file in Directory.EnumerateFiles(directoryPath, "*.txt"))
-                {
-                    var fileLines = File.ReadAllLines(file);
-
-                    if (!fileLines[0].Equals(userName) || !fileLines[1].Equals(passWord)) continue;
-                    var wallet = decimal.Parse(fileLines[2]);
-                    _user = new Member(userName, passWord, wallet);
-
-                    LoggedInLabel.Content = "Logged in as: " + _user.GetUsername();
-
-                    userFound = true;
-
-                    LoginButton.Content = "Logout";
-                }
-
-                if (!userFound)
-                {
-                    MessageBox.Show("User does not exist. Please check your credentials.");
-                }
+                MessageBox.Show("User does not exist. Please check your credentials.");
             }
         }
 
@@ -226,9 +213,15 @@ namespace FinalProject
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
             if (_user == null)
-                Login();
+            {
+                var loginWin = new LogRegWin(this);
+                loginWin.ShowDialog();
+            } 
             else
+            {
                 Logout();
+            }
+                
         }
 
         private void FilterButtonChecked(object sender, RoutedEventArgs e)
@@ -288,7 +281,8 @@ namespace FinalProject
         {
             if (_user == null)
             {
-                Login();
+                var loginWin = new LogRegWin(this);
+                loginWin.ShowDialog();
                 return;
             }
             _cart.ForEach(b =>
