@@ -13,7 +13,7 @@
                     <Label Content="Browse" MouseLeftButtonDown="TabItemMouseDown"></Label>
                 </TabItem.Header>
                 <Grid Background="#FFE5E5E5">
-                    <DataGrid x:Name="BrowseGrid" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="556" Width="841" SelectionChanged="BrowseSelected" SelectionMode="Single" SelectionUnit="FullRow">
+                    <DataGrid x:Name="BrowseGrid" AutoGenerateColumns="False" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="556" Width="841" SelectionChanged="BrowseSelected" SelectionMode="Single" SelectionUnit="FullRow">
                         <DataGrid.Resources>
                             <Style TargetType="DataGridCell">
                                 <Setter Property="BorderThickness" Value="0"/>
@@ -43,7 +43,7 @@
                     <Image x:Name="SearchResultImage" HorizontalAlignment="Left" Height="376" Margin="941,10,0,0" VerticalAlignment="Top" Width="251"/>
                     <Button x:Name="GoToStoreButton" Content="Add Selected to Cart" HorizontalAlignment="Left" Margin="257,36,0,0" VerticalAlignment="Top" Width="137" Click="AddSearchToCart_Click"/>
                     <TextBlock x:Name="SearchDescriptionText" HorizontalAlignment="Left" Margin="856,391,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="200" Width="400"/>
-                    <DataGrid x:Name="SearchGrid" HorizontalAlignment="Left" Margin="10,61,0,0" VerticalAlignment="Top" Height="530" Width="841" SelectionChanged="SearchSelected" SelectionMode="Single" SelectionUnit="FullRow">
+                    <DataGrid x:Name="SearchGrid" AutoGenerateColumns="False" HorizontalAlignment="Left" Margin="10,61,0,0" VerticalAlignment="Top" Height="530" Width="841" SelectionChanged="SearchSelected" SelectionMode="Single" SelectionUnit="FullRow">
                         <DataGrid.Resources>
                             <Style TargetType="DataGridCell">
                                 <Setter Property="BorderThickness" Value="0"/>
@@ -65,7 +65,7 @@
                     <Label x:Name="label" Content="Total:" HorizontalAlignment="Left" Margin="10,565,0,0" VerticalAlignment="Top"/>
                     <Label x:Name="TotalLabel" Content="$0.00" HorizontalAlignment="Left" Margin="62,565,0,0" VerticalAlignment="Top"/>
                     <TextBlock x:Name="CartDescriptionText" HorizontalAlignment="Left" Margin="856,391,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="200" Width="400"/>
-                    <DataGrid x:Name="CartGrid" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="515" Width="841" SelectionChanged="CartSelected" SelectionMode="Single" SelectionUnit="FullRow">
+                    <DataGrid x:Name="CartGrid" AutoGenerateColumns="False" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="515" Width="841" SelectionChanged="CartSelected" SelectionMode="Single" SelectionUnit="FullRow">
                         <DataGrid.Resources>
                             <Style TargetType="DataGridCell">
                                 <Setter Property="BorderThickness" Value="0"/>
@@ -81,12 +81,19 @@
                 </TabItem.Header>
                 <Grid Background="#FFE5E5E5">
                     <Button x:Name="ClearSelectedNotificationButton" Content="Clear Selected" HorizontalAlignment="Left" Margin="1071,571,0,0" VerticalAlignment="Top" Width="90"/>
-                    <ListBox x:Name="NotificationList" HorizontalAlignment="Left" Height="556" Margin="10,10,0,0" VerticalAlignment="Top" Width="1246"/>
                     <Button x:Name="ClearAllNotificationButton" Content="Clear All" HorizontalAlignment="Left" Margin="1166,571,0,0" VerticalAlignment="Top" Width="90"/>
+                    <DataGrid x:Name="NotificationGrid" AutoGenerateColumns="False" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="556" Width="1246" SelectionMode="Single" SelectionUnit="FullRow">
+                        <DataGrid.Resources>
+                            <Style TargetType="DataGridCell">
+                                <Setter Property="BorderThickness" Value="0"/>
+                                <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+                            </Style>
+                        </DataGrid.Resources>
+                    </DataGrid>
                 </Grid>
             </TabItem>
         </TabControl>
-        <Label x:Name="LoggedInLabel" Content="" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="1034,10,0,0" VerticalAlignment="Top" Width="141" Height="40"/>
+        <Label x:Name="LoggedInLabel" Content="" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="1034,10,0,0" VerticalAlignment="Top" Width="141" Height="40" MouseDown="UserClick"/>
         <Button x:Name="LoginButton" Content="Login" HorizontalAlignment="Left" Margin="1180,10,0,0" VerticalAlignment="Top" Width="82" Height="40" Click="LoginButton_Click"/>
 
     </Grid>

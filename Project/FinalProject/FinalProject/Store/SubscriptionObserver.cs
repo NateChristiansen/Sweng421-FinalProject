@@ -4,27 +4,26 @@ namespace FinalProject
 {
     public class SubscriptionObserver
     {
-        private readonly Dictionary<string, List<Member>> _subscribers = new Dictionary<string, List<Member>>();
-        public void NotifySubscribers(string title)
+        private readonly Dictionary<IBook, List<Member>> _subscribers = new Dictionary<IBook, List<Member>>();
+        public void NotifySubscribers(IBook book)
         {
-            if (!_subscribers.ContainsKey(title)) return;
-            _subscribers[title].ForEach(s =>
+            if (!_subscribers.ContainsKey(book)) return;
+            _subscribers[book].ForEach(s =>
             {
-                if (_subscribers.ContainsKey(title))
-                    s.Notify(title);
+                s.Notify(book);
             });
         }
 
-        public void AddSubscription(string title, Member member)
+        public void AddSubscription(IBook book, Member member)
         {
-            if (_subscribers.ContainsKey(title))
+            if (_subscribers.ContainsKey(book))
             {
-                _subscribers[title].Add(member);
+                _subscribers[book].Add(member);
             }
             else
             {
                 var list = new List<Member> {member};
-                _subscribers.Add(title, list);
+                _subscribers.Add(book, list);
             }
         }
     }

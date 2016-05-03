@@ -47,7 +47,7 @@ namespace FinalProject
                     _users = (List<Member>) bformatter.Deserialize(stream);
                 }
             }
-            catch (FileNotFoundException)
+            catch (Exception)
             {
                 _users = new List<Member>();
             }
@@ -90,6 +90,10 @@ namespace FinalProject
             CartGrid.Columns.Add(genre2);
             CartGrid.Columns.Add(publisher2);
             CartGrid.Columns.Add(price2);
+
+            NotificationGrid.Columns.Clear();
+            var notif = new DataGridTextColumn {Header = "Notification", IsReadOnly = true, Width = NotificationGrid.Width, Binding = new Binding("Text")};
+            NotificationGrid.Columns.Add(notif);
         }
 
         private void TabItemMouseDown(object sender, MouseButtonEventArgs e)
@@ -108,7 +112,9 @@ namespace FinalProject
                     PopulateStore();
                     break;
                 case "Notifications":
-                    NotificationList.ItemsSource = _user.Notifications;
+                    NotificationGrid.ClearValue(ItemsControl.ItemsSourceProperty);
+                    if (_user != null)
+                        NotificationGrid.ItemsSource = _user.Notifications;
                     break;
             }
         }
@@ -117,7 +123,8 @@ namespace FinalProject
         {
             var query = SearchBox.Text;
             SearchGrid.Items.Clear();
-            _filter.Apply(SearchBox.Text, _store.Search(query)).ForEach(b => SearchGrid.Items.Add(b));
+            SearchGrid.ClearValue(ItemsControl.ItemsSourceProperty);
+            SearchGrid.ItemsSource = _filter.Apply(SearchBox.Text, _store.Search(query));
         }
 
         private void AddSearchToCart_Click(object sender, RoutedEventArgs e)
@@ -134,8 +141,8 @@ namespace FinalProject
 
         private void PopulateStore()
         {
-            BrowseGrid.Items.Clear();
-            _store.GetBooks().ForEach(b => BrowseGrid.Items.Add(b));
+            BrowseGrid.ClearValue(ItemsControl.ItemsSourceProperty);
+            BrowseGrid.ItemsSource = _store.GetBooks();
         }
 
         private void BrowseSelected(object sender, SelectionChangedEventArgs selectionChangedEventArgs)
@@ -161,7 +168,7 @@ namespace FinalProject
 
         private bool CheckStore(IBook book)
         {
-            if (_store.InStock(book.Title))
+            if (_store.InStock(book))
                 return true;
             var result =
                 Interaction.MsgBox(
@@ -169,7 +176,7 @@ namespace FinalProject
                     MsgBoxStyle.YesNo, "Out of Stock");
             if (result == MsgBoxResult.No) return false;
             if (_user != null)
-                _store.Subscribe(_user, book.Title);
+                _store.Subscribe(_user, book);
             else
                 Interaction.MsgBox("Please log in before subscribing.", MsgBoxStyle.OkOnly, "Not Logged In");
             return false;
@@ -307,8 +314,7 @@ namespace FinalProject
             _cart.ForEach(c => d += c.Price);
             if (d > _user.Wallet)
             {
-                Interaction.MsgBox("You do not have enough funds to purchase these books.", MsgBoxStyle.OkOnly,
-                    "Not Enough Funds");
+                Interaction.MsgBox("You do not have enough funds to purchase these books.", MsgBoxStyle.OkOnly, "Not Enough Funds");
                 return;
             }
             _cart.ForEach(b =>
@@ -316,7 +322,7 @@ namespace FinalProject
                 if (!CheckStore(b))
                     _cart.Remove(b);
             });
-            _store.PurchaseBooks(_cart.Select(b => b.Title).ToList(), _user);
+            _store.PurchaseBooks(_cart, _user);
             ClearCart();
         }
 
@@ -338,6 +344,12 @@ namespace FinalProject
 
                 bformatter.Serialize(stream, _users);
             }
+        }
+
+        private void UserClick(object sender, MouseButtonEventArgs e)
+        {
+            if (_user == null) return;
+            Interaction.MsgBox(_user.OwnedBooks.Select(b => b.Title).ToString());
         }
     }
 }

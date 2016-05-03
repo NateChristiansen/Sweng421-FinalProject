@@ -8,28 +8,27 @@ namespace FinalProject
     public class Store
     {
         private readonly SubscriptionObserver _subs = new SubscriptionObserver();
-        private readonly Dictionary<string, Stock> _stocks = new Dictionary<string, Stock>();
         private readonly BookFactory _factory = new BookFactory();
 
         public List<IBook> GetBooks()
         {
-            return _stocks.Values.Select(s => s.GetBook()).ToList();
+            return _factory.GetBooks();
         }
 
-        public void PurchaseBooks(List<string> titles, Member user)
+        public void PurchaseBooks(List<IBook> books, Member user)
         {
-            titles.ForEach(t =>
+            books.ForEach(b =>
             {
-                if (_stocks[t].GetQuantity() <= 0) return;
-                var b = _factory.GetBook(t);
+                var book = _factory.GetBook(b);
+                if (book == null) return;
                 user.OwnedBooks.Add(b);
                 user.Wallet -= b.Price;
             });
         }
 
-        public bool InStock(string title)
+        public bool InStock(IBook book)
         {
-            return _stocks[title].GetQuantity() > 0;
+            return _factory.CheckStock(book);
         }
 
         public List<IBook> Search(string searchQuery)
@@ -54,18 +53,18 @@ namespace FinalProject
                    b.Title.ToLower().Contains(keyword);
         }
 
-        public void Subscribe(Member subscriber, string title)
+        public void Subscribe(Member subscriber, IBook book)
         {
-            _subs.AddSubscription(title, subscriber);
+            _subs.AddSubscription(book, subscriber);
         }
-        public void UpdateSubs(string title)
+        public void UpdateSubs(IBook book)
         {
-            new Thread(() => _subs.NotifySubscribers(title)).Start();
+            new Thread(() => _subs.NotifySubscribers(book)).Start();
         }
 
         public void AddBook(Stock bookstock)
         {
-            _stocks.Add(bookstock.GetBook().Title, bookstock);
+            _factory.AddStock(bookstock);
             bookstock.SetStore(this);
         }
     }

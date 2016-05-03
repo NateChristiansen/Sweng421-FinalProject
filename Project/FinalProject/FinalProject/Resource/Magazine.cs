@@ -1,7 +1,9 @@
-﻿using System.Windows.Media.Imaging;
+﻿using System;
+using System.Windows.Media.Imaging;
 
 namespace FinalProject
 {
+    [Serializable]
     public class Magazine : AbstractBook
     {
         public int Issue { get; protected set; }

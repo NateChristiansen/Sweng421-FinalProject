@@ -1,7 +1,9 @@
-﻿using System.Windows.Media.Imaging;
+﻿using System;
+using System.Windows.Media.Imaging;
 
 namespace FinalProject
 {
+    [Serializable]
     public class Book : AbstractBook
     {
         public Book(BitmapImage cover, string title, string summary, string author, string genre,

@@ -16,7 +16,7 @@ namespace FinalProject
         public string Password { get; set; }
         public List<string> SubscriberList = new List<string>();
         public List<IBook> OwnedBooks = new List<IBook>();
-        public List<string> Notifications = new List<string>();
+        public List<Notification> Notifications = new List<Notification>(); 
 
         public Member(string first, string last, string user, string pass, decimal wallet)
         {
@@ -32,30 +32,6 @@ namespace FinalProject
             Username = userName;
             Password = passWord;
             Wallet = wallet;
-        }
-
-        // creates the user's registration file
-        public void CreateUserFile()
-        {
-            string fileName = FirstName + LastName + ".txt";
-            var directoryPath = Path.GetDirectoryName(Path.GetDirectoryName(Directory.GetCurrentDirectory()));
-            var fullPath = Path.Combine(directoryPath, "RegisteredUsers");
-            var filePath = Path.Combine(fullPath, fileName);
-            if (!File.Exists(filePath))
-            {
-                TextWriter tw = new StreamWriter(filePath, true);
-                tw.WriteLine(Username);
-                tw.WriteLine(Password);
-                tw.WriteLine(Wallet);
-                tw.Close();
-
-            }
-            else
-            {
-                MessageBox.Show("Error creating file in database. Please try again.");
-            }
-
-            
         }
 
         public decimal GetWallet()
@@ -88,10 +64,20 @@ namespace FinalProject
             return SubscriberList;
         }
 
-        public void Notify(string title)
+        public void Notify(IBook book)
         {
-            throw new NotImplementedException();
+            Notifications.Add(new Notification
+            {
+                Text = $"{book.Title} by {book.Author} is now in stock!",
+                Time = DateTime.Now
+            });
         }
 
+        [Serializable]
+        public class Notification
+        {
+            public string Text { get; set; } 
+            public DateTime Time { get; set; }
+        }
     }
 }

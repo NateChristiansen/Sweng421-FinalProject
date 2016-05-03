@@ -13,7 +13,7 @@
                     <Button x:Name="AddToStoreButton" Content="Add Selected To Store" HorizontalAlignment="Left" Margin="661,589,0,0" VerticalAlignment="Top" Width="130" Click="AddToStoreButton_Click"/>
                     <Image x:Name="UnreleasedPreview" HorizontalAlignment="Left" Height="376" Margin="868,28,0,0" VerticalAlignment="Top" Width="251"/>
                     <TextBlock x:Name="UnreleasedDescription" HorizontalAlignment="Left" Margin="796,409,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="200" Width="400"/>
-                    <DataGrid x:Name="UnreleasedGrid" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="574" Width="781" SelectionChanged="UnreleasedSelected">
+                    <DataGrid x:Name="UnreleasedGrid" AutoGenerateColumns="False" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="574" Width="781" SelectionChanged="UnreleasedSelected">
                         <DataGrid.Resources>
                             <Style TargetType="DataGridCell">
                                 <Setter Property="BorderThickness" Value="0"/>
@@ -28,7 +28,7 @@
                     <Button x:Name="UpdateQuantityButton" Content="Update Quantity" HorizontalAlignment="Left" Margin="661,589,0,0" VerticalAlignment="Top" Width="130" Click="UpdateQuantityButton_Click"/>
                     <Image x:Name="ReleasedPreview" HorizontalAlignment="Left" Height="376" Margin="868,28,0,0" VerticalAlignment="Top" Width="251"/>
                     <TextBlock x:Name="ReleasedDescription" HorizontalAlignment="Left" Margin="796,409,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="200" Width="400"/>
-                    <DataGrid x:Name="ReleasedGrid" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="574" Width="781" SelectionChanged="ReleasedSelected">
+                    <DataGrid x:Name="ReleasedGrid" AutoGenerateColumns="False" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="574" Width="781" SelectionChanged="ReleasedSelected">
                         <DataGrid.Resources>
                             <Style TargetType="DataGridCell">
                                 <Setter Property="BorderThickness" Value="0"/>
