@@ -188,12 +188,25 @@ namespace FinalProject
 
             var passWord = lrw.RegPassBox.Text;
 
-            if (first.Equals("") || last.Equals("") || userName.Equals("") || passWord.Equals("")) return;
-            _user = new Member(first, last, userName, passWord, (decimal)50.00);
+           var check = _users.FirstOrDefault(u => u.Username.Equals(userName));
 
-            LoggedInLabel.Content = "Logged in as: " + _user.GetUsername();
+            if (check == null)
+            {
+                if (first.Equals("") || last.Equals("") || userName.Equals("") || passWord.Equals("")) return;
+                _user = new Member(first, last, userName, passWord, (decimal) 50.00);
 
-            LoginButton.Content = "Logout";
+                _users.Add(_user);
+
+                LoggedInLabel.Content = "Logged in as: " + _user.GetUsername();
+
+                LoginButton.Content = "Logout";
+            }
+            else
+            {
+                MessageBox.Show("User already exists. Please enter your own credentials.");
+            }
+
+            
         }
 
         public void Login(LogRegWin lrw)
@@ -202,22 +215,13 @@ namespace FinalProject
             var user = lrw.UserNameBox.Text;
             var pass = lrw.PasswordBox.Text;
 
-            var directoryPath = Path.GetDirectoryName(Path.GetDirectoryName(Directory.GetCurrentDirectory()));
-            directoryPath = Path.Combine(directoryPath, "RegisteredUsers");
+            var check = _users.FirstOrDefault(u => u.Username.Equals(user) && u.Password.Equals(pass));
 
-            var userFound = false;
-
-            foreach (var file in Directory.EnumerateFiles(directoryPath, "*.txt"))
+            if (check != null)
             {
-                var fileLines = File.ReadAllLines(file);
-
-                if (!fileLines[0].Equals(user) || !fileLines[1].Equals(pass)) continue;
-                var wallet = decimal.Parse(fileLines[2]);
-                _user = new Member(user, pass, wallet);
+                _user = check;
 
                 LoggedInLabel.Content = "Logged in as: " + _user.GetUsername();
-
-                userFound = true;
 
                 LoginButton.Content = "Logout";
             }
